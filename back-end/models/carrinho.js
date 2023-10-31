@@ -1,11 +1,11 @@
 "use strict";
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
-const Produto = require("./produto");
-const Usuario = require("./usuario");
+const produto = require("./produto");
+const usuario = require("./usuario");
 
-const Carrinho = sequelize.define(
-    "Carrinho",
+const carrinho = sequelize.define(
+    "carrinho",
     {
         idCarrinho: {
             allowNull: false,
@@ -37,19 +37,19 @@ const Carrinho = sequelize.define(
     }
 );
 
-Carrinho.belongsTo(Usuario, {
+carrinho.belongsTo(usuario, {
     foreignKey: 'usuarioId',
     allowNull: false,
     onDelete: "CASCADE",
 });
 
-Carrinho.belongsTo(Produto, {
+carrinho.belongsTo(produto, {
     through: "CarrinhoProduto",
     foreignKey: 'produtoId',
     allowNull: false,
     onDelete: "CASCADE",
 });
 
-module.exports = Carrinho;
+module.exports = carrinho;
 
 
