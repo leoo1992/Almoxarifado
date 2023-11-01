@@ -176,7 +176,7 @@ const FormLogin = () => {
                 <MDBBtnGroup className="shadow-none">
                   <OverlayTrigger placement="bottom" overlay={<Tooltip id="ocultar-button-tooltip">Cadastrar</Tooltip>}>
                     <MDBBtn
-                      href="/cadastrousers"
+                      href="/cadastro-usuarios"
                       className='fw-bold text-white shadow'
                       color='primary'
                       rounded

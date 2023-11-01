@@ -2,7 +2,6 @@ import React from 'react';
 import "./login.css";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from "react-router-dom";
 import { MDBBtn } from 'mdb-react-ui-kit';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -14,17 +13,16 @@ const NavLogin = () => {
                 IA.<span className='text-success'>Store</span>
             </Navbar.Brand>
             <Nav className="text-end p-0 m-0">
-                <Link to="/cadastrousers" className=''>
-                    <OverlayTrigger placement="bottom" overlay={<Tooltip id="ocultar-button-tooltip">Cadastrar</Tooltip>}>
-                        <MDBBtn
-                            className='fw-bold text-white border shadow'
-                            rounded
-                            color='primary'
-                        >
-                            Cadastrar
-                        </MDBBtn>
-                    </OverlayTrigger>
-                </Link>
+                <OverlayTrigger placement="bottom" overlay={<Tooltip id="ocultar-button-tooltip">Cadastrar</Tooltip>}>
+                    <MDBBtn
+                        href="/cadastro-usuarios"
+                        className='fw-bold text-white border shadow'
+                        rounded
+                        color='primary'
+                    >
+                        Cadastrar
+                    </MDBBtn>
+                </OverlayTrigger>
             </Nav>
         </Navbar>
     );
