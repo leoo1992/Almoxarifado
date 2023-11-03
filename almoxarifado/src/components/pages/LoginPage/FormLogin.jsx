@@ -134,7 +134,6 @@ const FormLogin = () => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
-                  defaultValue=''
                 />
                 {formErrors.usuario && (
                   <div className="error-message">{formErrors.usuario}</div>
@@ -152,7 +151,6 @@ const FormLogin = () => {
                   onChange={handleChange}
                   required
                   autoComplete="off"
-
                 />
               </Form.Group>
               <div className="container d-flex m-0 p-0 justify-content-end">

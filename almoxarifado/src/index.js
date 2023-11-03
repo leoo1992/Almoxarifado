@@ -12,12 +12,12 @@ const root = document.getElementById('root'),
   cookies = Cookies.get(),
   actionsExecuted = localStorage.getItem('actionsExecuted');
 
-console.error = () => { };
-console.warn = () => { };
-console.info = () => { };
-console.log = () => { };
-console.trace = () => { };
-console.debug = () => { };
+// console.error = () => { };
+// console.warn = () => { };
+// console.info = () => { };
+// console.log = () => { };
+// console.trace = () => { };
+// console.debug = () => { };
 
 if (timeToken.getHours() < new Date().getHours()) {
   localStorage.removeItem("token");
