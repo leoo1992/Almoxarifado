@@ -16,8 +16,11 @@ const FormLogin = () => {
   const [isFormValid, setIsFormValid] = useState(true);
   const [showInactive, setShowInactive] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
+  // eslint-disable-next-line
   const [isUserFilled, setIsUserFilled] = useState(false);
+  // eslint-disable-next-line
   const [isPasswordFilled, setIsPasswordFilled] = useState(false);
+  const [senha, setSenha] = useState("");
 
   const errorRef = useRef(null),
     [formData, setFormData] = useState({
@@ -42,6 +45,11 @@ const FormLogin = () => {
 
   const handleChange = async (e) => {
     const { name, value } = e.target;
+    const trimmedValue = value.trim();
+    setFormData((prevData) => ({ ...prevData, [name]: trimmedValue }));
+
+    let isFormValid = false;
+    let newFormErrors = { ...formErrors };
 
     if (name === "senha") {
       const sanitizedValue = value.replace(/\s/g, "");
@@ -53,13 +61,48 @@ const FormLogin = () => {
     const hasErrors = Object.values(formErrors).some((error) => error !== "");
     setIsFormValid(!hasErrors);
 
-    if (name === "usuario") {
-      setIsUserFilled(!!value);
+    if (name === "senha") {
+      setSenha(value);
+      setIsPasswordFilled(!!value);
+      if (value.length < 6 || value.includes(" ")) {
+        newFormErrors.senha = " * Senha inválida";
+        isFormValid = false;
+      } else {
+        newFormErrors.senha = "";
+        isFormValid = true;
+      }
     }
 
-    if (name === "senha") {
-      setIsPasswordFilled(!!value);
+    if (name === "usuario") {
+      setIsUserFilled(!!value);
+      if (value.includes(".") && value.includes("@")) {
+        newFormErrors.usuario = "";
+        isFormValid = true;
+      } else {
+        newFormErrors.usuario = " * Email inválido";
+        isFormValid = false;
+      }
+
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (emailRegex.test(value)) {
+        newFormErrors.usuario = "";
+        isFormValid = true;
+      } else {
+        newFormErrors.usuario = " * Email inválido";
+        isFormValid = false;
+      }
     }
+
+    if (isFormValid) {
+      newFormErrors.usuario = "";
+      newFormErrors.senha = "";
+      isFormValid = true;
+    }
+
+    setIsPasswordFilled(!!senha);
+    setIsFormValid(isFormValid);
+    setFormErrors(newFormErrors);
+
   };
 
   const handleSubmit = (event) => {
@@ -75,7 +118,7 @@ const FormLogin = () => {
     });
 
     setFormErrors(errors);
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(errors).length > 0 || Object.keys(errors).length < 0 || Object.keys(errors).length !== 0) {
       return;
     }
     api
@@ -166,7 +209,7 @@ const FormLogin = () => {
                 <div className="error-message">{formErrors.senha}</div>
               )}
               {!isFormValid && (
-                <div className="error-message">
+                <div className="error-message text-center mt-2 text-danger">
                   Usuário ou senha incorretos.
                 </div>
               )}
@@ -187,9 +230,8 @@ const FormLogin = () => {
                       type="submit"
                       className='fw-bold text-white shadow'
                       color='success'
-                      disabled={!isUserFilled || !isPasswordFilled}
+                      disabled={!isFormValid}
                       rounded
-
                     >
                       Entrar
                     </MDBBtn>
