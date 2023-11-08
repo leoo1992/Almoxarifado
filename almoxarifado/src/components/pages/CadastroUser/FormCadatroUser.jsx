@@ -16,8 +16,10 @@ const FormCadastroUser = () => {
     const [isFormValid, setIsFormValid] = useState(false);
     const [showInactive, setShowInactive] = useState(true);
     const [passwordType, setPasswordType] = useState("password");
-    const [isPasswordFilled, setIsPasswordFilled] = useState(false);
     const errorRef = useRef(null);
+    // eslint-disable-next-line
+    const [isPasswordFilled, setIsPasswordFilled] = useState(false);
+    // eslint-disable-next-line
     const [isConfirmPasswordFilled, setIsConfirmPasswordFilled] = useState(false);
     const [confirmSenha, setConfirmSenha] = useState("");
     const [senha, setSenha] = useState("");
