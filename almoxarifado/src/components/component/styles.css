@@ -1,0 +1,11 @@
+.menu-tamanho {
+    width: 230px;
+}
+
+.hover-menu {
+    box-shadow: -2px 2px 200px rgb(0, 0, 0);
+}
+
+.btn-menu-tamanho {
+    width: 200px;
+}
