@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 
 const NavIcons = (props) => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
-
+    const totalCounters = '';
     useEffect(() => {
         props.updateTheme(theme);
     }, [theme, props]);
@@ -43,12 +43,6 @@ const NavIcons = (props) => {
         </Tooltip>
     );
 
-    const menuTooltip = (
-        <Tooltip id="menu-tooltip">
-            Menu
-        </Tooltip>
-    );
-
     const shoppingTooltip = (
         <Tooltip id="shopping-tooltip">
             Carrinho
@@ -65,7 +59,7 @@ const NavIcons = (props) => {
                     size='lg'
                     color='none'
                 >
-                    <span className="badge rounded-9 text-white fw-bold m-0 rounded-circle bg-success ">199</span>
+                    <span className="badge rounded-9 text-white fw-bold m-0 rounded-circle bg-success ">{totalCounters}</span>
                     <FontAwesomeIcon icon={faShoppingBasket}
                         className='text-white m-0 p-1 rounded-circle'
                     />
@@ -100,11 +94,7 @@ const NavIcons = (props) => {
                     />
                 </MDBBtn>
             </OverlayTrigger>
-
-            <OverlayTrigger placement="bottom" overlay={menuTooltip}>
                 < Menu />
-            </OverlayTrigger>
-
         </div>
     );
 };
