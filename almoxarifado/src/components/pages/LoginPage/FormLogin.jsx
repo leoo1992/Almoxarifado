@@ -13,7 +13,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const FormLogin = () => {
 
-  const [isFormValid, setIsFormValid] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [showInactive, setShowInactive] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
   // eslint-disable-next-line
@@ -21,6 +21,10 @@ const FormLogin = () => {
   // eslint-disable-next-line
   const [isPasswordFilled, setIsPasswordFilled] = useState(false);
   const [senha, setSenha] = useState("");
+  // eslint-disable-next-line
+  const [usuario, setUser] = useState("");
+  const [validaEmail, setValidaEmail] = useState(false);
+  const [validaSenha, setValidaSenha] = useState(false);
 
   const errorRef = useRef(null),
     [formData, setFormData] = useState({
@@ -43,67 +47,62 @@ const FormLogin = () => {
     }
   }, [formErrors]);
 
+  const validaFormulario = (validaEmail, validaSenha) => {
+    if (validaEmail && validaSenha) {
+      setIsFormValid(true);
+      return isFormValid
+    } else {
+      setIsFormValid(false);
+      return !isFormValid
+    }
+  };
+
   const handleChange = async (e) => {
     const { name, value } = e.target;
     const trimmedValue = value.trim();
     setFormData((prevData) => ({ ...prevData, [name]: trimmedValue }));
 
-    let isFormValid = false;
     let newFormErrors = { ...formErrors };
 
     if (name === "senha") {
       const sanitizedValue = value.replace(/\s/g, "");
       setFormData((prevData) => ({ ...prevData, [name]: sanitizedValue }));
-    } else {
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-    }
-
-    const hasErrors = Object.values(formErrors).some((error) => error !== "");
-    setIsFormValid(!hasErrors);
-
-    if (name === "senha") {
       setSenha(value);
       setIsPasswordFilled(!!value);
-      if (value.length < 6 || value.includes(" ")) {
+
+      if (value.length !== 8 || value.includes(" ") || !value) {
         newFormErrors.senha = " * Senha inválida";
-        isFormValid = false;
+        setValidaSenha(false);
+        setIsFormValid(false);
       } else {
-        newFormErrors.senha = "";
-        isFormValid = true;
+        newFormErrors.senha = false;
+        setValidaSenha(true);
+        validaFormulario(validaEmail, true);
       }
     }
 
     if (name === "usuario") {
+      setUser(value);
       setIsUserFilled(!!value);
-      if (value.includes(".") && value.includes("@")) {
-        newFormErrors.usuario = "";
-        isFormValid = true;
-      } else {
-        newFormErrors.usuario = " * Email inválido";
-        isFormValid = false;
-      }
-
       const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (emailRegex.test(value)) {
-        newFormErrors.usuario = "";
-        isFormValid = true;
-      } else {
+
+      if (!emailRegex.test(value) || !value.includes(".") || !value.includes("@") || value.length === 0 || !value) {
         newFormErrors.usuario = " * Email inválido";
-        isFormValid = false;
+        setValidaEmail(false);
+        setIsFormValid(false);
+      } else {
+        newFormErrors.usuario = false;
+        setValidaEmail(true);
+        validaFormulario(true, validaSenha);
       }
     }
 
-    if (isFormValid) {
-      newFormErrors.usuario = "";
-      newFormErrors.senha = "";
-      isFormValid = true;
-    }
-
-    setIsPasswordFilled(!!senha);
-    setIsFormValid(isFormValid);
     setFormErrors(newFormErrors);
-
+    setIsUserFilled(!!usuario)
+    setIsPasswordFilled(!!senha);
   };
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -113,7 +112,7 @@ const FormLogin = () => {
 
     requiredFields.forEach((field) => {
       if (!formData[field]) {
-        errors[field] = "Campo obrigatório";
+        errors[field] = " * Campo obrigatório";
       }
     });
 
@@ -138,11 +137,11 @@ const FormLogin = () => {
           }, 5000);
 
         } else {
-          toast.error("Usuário ou senha incorretos");
+          toast.error("* Usuário ou senha incorretos");
         }
       })
       .catch(() => {
-        toast.error("Ocorreu um erro ao fazer login. Tente novamente mais tarde.");
+        toast.error("* Usuário ou senha incorretos");
       });
   };
 
@@ -160,12 +159,12 @@ const FormLogin = () => {
         pauseOnHover={false}
         theme='dark'
       />
-      <Container className="form-login mt-4 fw-semibold">
-        <Row className="justify-content-center">
-          <Col className='p-3 rounded-5 shadow bg-primary-subtle'>
+      <Container className="form-login mt-4 fw-semibold shadow rounded-9">
+        <Row className="justify-content-center shadow rounded-9">
+          <Col className='p-3 rounded-5 shadow bg-primary-subtle shadow rounded-9'>
             <h3 className='text-center mt-2 fw-bold text-primary text-store'>IA.<span className='text-success'>Store</span></h3>
             <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formBasicEmail" className='mt-3'>
+              <Form.Group controlId="formBasicEmail" className='mt-3 fs-6'>
                 <MDBInput
                   wrapperClass='mb-4'
                   label='Usuario'
@@ -173,13 +172,13 @@ const FormLogin = () => {
                   type='email'
                   name='usuario'
                   value={formData.usuario}
-                  className='shadow border border-secondary-subtle border-2 rounded-5 text-center bg-body'
+                  className='shadow border border-white border-5 rounded bg-body fs-6 m-0 p-1 d-flex justify-content-center align-content-center align-items-center'
                   onChange={handleChange}
                   required
                   autoComplete="off"
                 />
                 {formErrors.usuario && (
-                  <div className="error-message">{formErrors.usuario}</div>
+                  <div className="error-message text-danger fw-bolder fs-6 p-0 m-0">{formErrors.usuario}</div>
                 )}
               </Form.Group>
               <Form.Group controlId="formBasicPassword" className='mt-3'>
@@ -190,7 +189,7 @@ const FormLogin = () => {
                   name='senha'
                   type={passwordType}
                   value={formData.senha}
-                  className='shadow border border-secondary-subtle border-2 rounded-5 text-center bg-body'
+                  className='shadow border border-white border-5 rounded-5 bg-body fs-6 m-0 p-1 d-flex justify-content-center align-content-center align-items-center'
                   onChange={handleChange}
                   required
                   autoComplete="off"
@@ -206,11 +205,11 @@ const FormLogin = () => {
                 </OverlayTrigger>
               </div>
               {formErrors.senha && (
-                <div className="error-message">{formErrors.senha}</div>
+                <div className="error-message text-danger fw-bolder fs-6 p-0 m-0">{formErrors.senha}</div>
               )}
               {!isFormValid && (
-                <div className="error-message text-center mt-2 text-danger">
-                  Usuário ou senha incorretos.
+                <div className="error-message text-danger fw-bolder fs-6 p-0 m-0">
+                  * Usuário ou senha incorretos.
                 </div>
               )}
               <Col className='d-flex flex-nowrap justify-content-center mt-4 p-0 shadow-none'>
