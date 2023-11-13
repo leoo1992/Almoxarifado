@@ -70,8 +70,20 @@ const FormLogin = () => {
       setSenha(value);
       setIsPasswordFilled(!!value);
 
-      if (value.length !== 8 || value.includes(" ") || !value) {
-        newFormErrors.senha = " * Senha inválida";
+      const senhaRegex = /^(?=(?:.*[A-Za-z]){3})(?=(?:.*\W){1})(?=(?:.*\d){4}).{8,}$/;
+
+      if (value.length !== 8 || value.includes(" ") || !value || !senhaRegex.test(value)) {
+        newFormErrors.senha = (
+          <span className="fs-6">
+            * Senha inválida: <br />
+            <span className="text-black fw-light fs-6 p-0 m-0">
+              Obrigatório: <br />
+              <span className="d-flex justify-content-center align-content-center text-center">
+                3 letras, 1 símbolo e 4 números
+              </span>
+            </span>
+          </span>
+        );
         setValidaSenha(false);
         setIsFormValid(false);
       } else {
@@ -102,8 +114,6 @@ const FormLogin = () => {
     setIsPasswordFilled(!!senha);
   };
 
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -116,10 +126,31 @@ const FormLogin = () => {
       }
     });
 
+    if (formData.senha.trim().length !== 8 || formData.senha.includes(" ") || !formData.senha) {
+      errors.senha = " * Senha inválida";
+    }
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!emailRegex.test(formData.usuario) || !formData.usuario.includes(".") || !formData.usuario.includes("@") || formData.usuario.trim().length === 0 || !formData.usuario) {
+      errors.usuario = " * Email inválido";
+    }
+
+    const senhaRegex = /^(?=(?:.*[A-Za-z]){3})(?=(?:.*\W){1})(?=(?:.*\d){4}).{8,}$/;
+    if (!senhaRegex.test(formData.senha)) {
+      errors.senha = " * Senha inválida";
+    }
+
+    setFormData({
+      usuario: formData.usuario.trim(),
+      senha: formData.senha.trim(),
+    });
+
     setFormErrors(errors);
+
     if (Object.keys(errors).length > 0 || Object.keys(errors).length < 0 || Object.keys(errors).length !== 0) {
       return;
     }
+
     api
       .post("/login", formData)
       .then((response) => {
@@ -206,11 +237,6 @@ const FormLogin = () => {
               </div>
               {formErrors.senha && (
                 <div className="error-message text-danger fw-bolder fs-6 p-0 m-0">{formErrors.senha}</div>
-              )}
-              {!isFormValid && (
-                <div className="error-message text-danger fw-bolder fs-6 p-0 m-0">
-                  * Usuário ou senha incorretos.
-                </div>
               )}
               <Col className='d-flex flex-nowrap justify-content-center mt-4 p-0 shadow-none'>
                 <MDBBtnGroup className="shadow-none">
