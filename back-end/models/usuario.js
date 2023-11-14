@@ -12,17 +12,14 @@ const usuario = sequelize.define(
       primaryKey: true,
       unique: true,
     },
-    email: {
+    usuario: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     senha: {
-      type: DataTypes.STRING(8),
+      type: DataTypes.STRING(),
       allowNull: false,
-      validate: {
-        len: [1, 8]
-      }
     },
   },
   {
