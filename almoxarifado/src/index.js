@@ -7,10 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-const root = document.getElementById('root'),
-  timeToken = new Date(),
-  cookies = Cookies.get(),
-  actionsExecuted = localStorage.getItem('actionsExecuted');
+const root = document.getElementById('root');
+const timeToken = new Date();
+const cookies = Cookies.get();
 
 // console.error = () => { };
 // console.warn = () => { };
@@ -25,16 +24,6 @@ if (timeToken.getHours() < new Date().getHours()) {
   localStorage.clear();
   sessionStorage.clear();
 };
-
-if (!actionsExecuted) {
-  const cookies = Cookies.get();
-  for (const cookie in cookies) {
-    Cookies.remove(cookie);
-  }
-  localStorage.clear();
-  sessionStorage.clear();
-  localStorage.setItem('actionsExecuted', 'true');
-}
 
 const render = () => {
   ReactDOM.createRoot(root).render(
