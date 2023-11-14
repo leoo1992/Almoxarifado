@@ -26,7 +26,6 @@ const Menu = () => {
                     variant="primary"
                     onClick={toggleShow}
                     className='m-1 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-5 border'
-                    shadow
                 >
                     <FontAwesomeIcon icon={faBars} className='text-white shadow m-0 p-1 fw-bold fs-5' />
                 </MDBBtn >
@@ -43,7 +42,10 @@ const Menu = () => {
                 restoreFocus
                 className="border-0 bg-primary hover-menu menu-tamanho border-black w-auto shadow-6-strong"
             >
-                <Offcanvas.Header closeButton closeVariant='white fw-bolder text-light rounded-9 btn-outline-danger fs-6 btn-sm shadow'>
+                <Offcanvas.Header
+                    closeButton
+                    closeVariant='white'
+                >
                     <Offcanvas.Title className="fs-4 fw-bold text-white text-store-nav" >
                         Menu
                     </Offcanvas.Title>
