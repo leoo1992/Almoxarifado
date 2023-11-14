@@ -4,26 +4,26 @@ const Usuario = require("../models/usuario");
 
 // Função de controle para a rota de login
 exports.login = async (req, res) => {
-  const { email, senha } = req.body;
-  if (!email || !senha) {
+  const { usuario, senha } = req.body;
+  if (!usuario || !senha) {
     return res.status(400).json({ error: "Usuário e senha são obrigatórios." });
   }
   try {
-    const usuario = await Usuario.findOne({
+    const usuarioDoBanco = await Usuario.findOne({
       where: {
-        email,
+        usuario,
       },
     });
 
     if (!usuario) {
       return res.status(401).json({ error: "Credenciais inválidas." });
     }
-    const isPasswordValid = await bcrypt.compare(senha, usuario.senha);
+    const isPasswordValid = await bcrypt.compare(senha, usuarioDoBanco.senha);
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Credenciais inválidas." });
     }
 
-    const token = jwt.sign({ userId: usuario.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: usuarioDoBanco.id }, process.env.JWT_SECRET, {
       expiresIn: 3600, // 1 h
       //expiresIn: 1800, // 30 min
       //expiresIn: 900, // 15 min
