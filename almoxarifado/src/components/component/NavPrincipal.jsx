@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import "./styles.css";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavIcons from './NavIcons'
 
 const NavPrincipal = (props) => {
-    const [theme, setTheme] = useState("dark"),
-    updateTheme = (newTheme) => {
-      setTheme(newTheme);
+    // eslint-disable-next-line
+    const [theme, setTheme] = useState("dark");
+    const updateTheme = (newTheme) => {
+        setTheme(newTheme);
+        props.updateTheme(newTheme);
     };
 
     return (

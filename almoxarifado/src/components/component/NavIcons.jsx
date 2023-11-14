@@ -19,18 +19,32 @@ const NavIcons = (props) => {
     const handlelogout = () => {
         const cookies = Cookies.get();
         for (const cookie in cookies) {
-            Cookies.remove(cookie);
+            if (cookie.startsWith("token")) {
+                Cookies.remove(cookie);
+            }
         }
-        localStorage.clear();
-        sessionStorage.clear();
-        localStorage.setItem('actionsExecuted', 'false');
+
+        Object.keys(localStorage).forEach((key) => {
+            if (key.startsWith("token")) {
+                localStorage.removeItem(key);
+            }
+        });
+
+        Object.keys(sessionStorage).forEach((key) => {
+            if (key.startsWith("token")) {
+                sessionStorage.removeItem(key);
+            }
+        });
+
         window.location.href = '/';
     };
 
-    const toggleTheme = () => {
+
+    const handleToggleTheme = () => {
         const newTheme = theme === "dark" ? "default" : "dark";
         setTheme(newTheme);
         localStorage.setItem('theme', newTheme);
+        props.updateTheme(newTheme);
     };
 
     const logoutTooltip = (
@@ -51,7 +65,7 @@ const NavIcons = (props) => {
 
     return (
         <div className="d-flex m-0 p-0 align-items-center gap-1 justify-content-center  align-content-center">
-            
+
             <OverlayTrigger placement="bottom" overlay={shoppingTooltip}>
                 <MDBBtn
                     rounded
@@ -68,11 +82,12 @@ const NavIcons = (props) => {
 
             <OverlayTrigger placement="bottom" overlay={toggleThemeTooltip}>
                 <MDBBtn
-                    onClick={toggleTheme}
+                    onClick={handleToggleTheme}
                     floating
                     className='m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold border'
                     size='sm'
                     color='none'
+                    id='trocaTema'
                 >
                     {theme === "dark" ? (
                         <FontAwesomeIcon icon={faSun} className='text-black bg-warning m-0 p-2 rounded-circle' />
@@ -94,7 +109,7 @@ const NavIcons = (props) => {
                     />
                 </MDBBtn>
             </OverlayTrigger>
-                < Menu />
+            < Menu />
         </div>
     );
 };
