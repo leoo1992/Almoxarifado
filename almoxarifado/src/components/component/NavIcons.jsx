@@ -75,9 +75,9 @@ const NavIcons = (props) => {
                     color='none'
                 >
                     {theme === "dark" ? (
-                        <FontAwesomeIcon icon={faSun} className='text-black bg-warning m-0 p-2 rounded-circle shadow' />
+                        <FontAwesomeIcon icon={faSun} className='text-black bg-warning m-0 p-2 rounded-circle' />
                     ) : (
-                        <FontAwesomeIcon icon={faMoon} className='text-black bg-info m-0 p-2 rounded-circle shadow' />
+                        <FontAwesomeIcon icon={faMoon} className='text-black bg-info m-0 p-2 rounded-circle' />
                     )}
                 </MDBBtn>
             </OverlayTrigger>
