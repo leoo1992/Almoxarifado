@@ -3,8 +3,8 @@ const Users = require('../models/usuario');
 
 // Função de controle para o cadastro de usuários
 exports.cadastrarUsuario = async (req, res) => {
-  const { email, senha } = req.body;
-  if (!email || !senha) {
+  const { usuario, senha} = req.body;
+  if (!senha || !usuario) {
     return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
   }
 
@@ -13,8 +13,8 @@ exports.cadastrarUsuario = async (req, res) => {
     const hashedPassword = await bcrypt.hash(senha, saltRounds);
 
     const createdUser = await Users.create({
-      email,
-      senha: hashedPassword,
+      usuario: usuario,
+      senha: hashedPassword
     });
 
     res.status(200).json({ message: 'Cadastro realizado com sucesso.' });
