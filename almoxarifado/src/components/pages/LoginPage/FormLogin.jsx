@@ -13,7 +13,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const FormLogin = () => {
 
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(true);
   const [showInactive, setShowInactive] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
   // eslint-disable-next-line
@@ -21,16 +21,16 @@ const FormLogin = () => {
   // eslint-disable-next-line
   const [isPasswordFilled, setIsPasswordFilled] = useState(false);
   const [senha, setSenha] = useState("");
-  // eslint-disable-next-line
   const [usuario, setUser] = useState("");
   const [validaEmail, setValidaEmail] = useState(false);
   const [validaSenha, setValidaSenha] = useState(false);
 
-  const errorRef = useRef(null),
-    [formData, setFormData] = useState({
-      usuario: "",
-      senha: "",
-    });
+  const errorRef = useRef(null);
+
+  const [formData, setFormData] = useState({
+    usuario: "",
+    senha: "",
+  });
 
   const [formErrors, setFormErrors] = useState({
     usuario: "",
@@ -156,10 +156,26 @@ const FormLogin = () => {
       .then((response) => {
         if (response.data.token) {
 
-          localStorage.setItem("token", response.data.token);
-          Cookies.set('token', response.data.token, { expires: 1 / 24, secure: true, sameSite: 'strict' });
+          const expirationTime = 1 / 24;
+          const expirationMilliseconds = expirationTime * 60 * 60 * 1000;
+
+          Cookies.set('token', response.data.token, {
+            expires: new Date(Date.now() + expirationMilliseconds),
+            secure: true,
+            sameSite: 'strict'
+          });
+
+          const expirationTimestamp = Date.now() + expirationMilliseconds;
+          localStorage.setItem('token', JSON.stringify({
+            value: response.data.token,
+            expiration: expirationTimestamp
+          }));
 
           setFormErrors({});
+          setFormData({
+            usuario: "",
+            senha: "",
+          });
 
           toast.success("Login efetuado com sucesso...Redirecionando");
 
@@ -194,8 +210,8 @@ const FormLogin = () => {
         <Row className="justify-content-center shadow rounded-9">
           <Col className='p-3 rounded-5 shadow bg-primary-subtle shadow rounded-9'>
             <h3 className='text-center mt-2 fw-bold text-primary text-store'>IA.<span className='text-success'>Store</span></h3>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formBasicEmail" className='mt-3 fs-6'>
+            <Form onSubmit={handleSubmit} autoComplete="off">
+              <Form.Group controlId="formBasicEmail" className='mt-3 fs-6' autoComplete="off">
                 <MDBInput
                   wrapperClass='mb-4'
                   label='Usuario'
@@ -212,7 +228,7 @@ const FormLogin = () => {
                   <div className="error-message text-danger fw-bolder fs-6 p-0 m-0">{formErrors.usuario}</div>
                 )}
               </Form.Group>
-              <Form.Group controlId="formBasicPassword" className='mt-3'>
+              <Form.Group controlId="formBasicPassword" className='mt-3' autoComplete="off">
                 <MDBInput
                   wrapperClass='mb-1'
                   label='Senha'
@@ -223,7 +239,7 @@ const FormLogin = () => {
                   className='shadow border border-white border-5 rounded-5 bg-body fs-6 m-0 p-1 d-flex justify-content-center align-content-center align-items-center'
                   onChange={handleChange}
                   required
-                  autoComplete="off"
+                  autoComplete="new-password"
                 />
               </Form.Group>
               <div className="container d-flex m-0 p-0 justify-content-end">
