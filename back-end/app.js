@@ -4,6 +4,10 @@ const sequelize = require("./config/sequelize");
 const cors = require("cors");
 const app = express();
 const port = 3000;
+const bodyParser = require('body-parser');
+const {veryJWT} = require('./middlewares/auth')
+
+app.use(bodyParser.json());
 
 //IMPORTS AUTH
 const loginRouter = require("./routes/Auth/login");
@@ -33,12 +37,12 @@ app.use("/", loginRouter);
 
 //ROTAS USUARIO
 app.use("/", cadastroUserRouter);
-app.use("/", deletarUserByIdRouter);
+app.use("/", veryJWT, deletarUserByIdRouter);
 
 //ROTAS PRODUTO
-app.use("/", crudProduto);
+app.use("/", veryJWT, crudProduto);
 
 //ROTAS CARRINHO
-app.use("/", crudCarrinho);
+app.use("/", veryJWT, crudCarrinho);
 
 module.exports = app;
