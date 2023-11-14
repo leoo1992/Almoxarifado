@@ -13,16 +13,22 @@ import { useNavigate } from "react-router-dom";
 
 const FormCadastroUser = () => {
     const navigate = useNavigate();
-    const [isFormValid, setIsFormValid] = useState(false);
+    const [isFormValid, setIsFormValid] = useState(true);
     const [showInactive, setShowInactive] = useState(true);
     const [passwordType, setPasswordType] = useState("password");
     const errorRef = useRef(null);
+    // eslint-disable-next-line
+    const [isUserFilled, setIsUserFilled] = useState(false);
     // eslint-disable-next-line
     const [isPasswordFilled, setIsPasswordFilled] = useState(false);
     // eslint-disable-next-line
     const [isConfirmPasswordFilled, setIsConfirmPasswordFilled] = useState(false);
     const [confirmSenha, setConfirmSenha] = useState("");
     const [senha, setSenha] = useState("");
+    const [usuario, setUser] = useState("");
+    const [validaEmail, setValidaEmail] = useState(false);
+    const [validaSenha, setValidaSenha] = useState(false);
+    const [validaCSenha, setValidaCSenha] = useState(false);
 
     useEffect(() => {
         setPasswordType(showInactive ? "password" : "text");
@@ -39,76 +45,91 @@ const FormCadastroUser = () => {
         confirmSenha: ""
     });
 
+    const validaFormulario = (validaEmail, validaSenha, validaCSenha) => {
+        if (validaEmail && validaSenha && validaCSenha) {
+            setIsFormValid(true);
+            return isFormValid
+        } else {
+            setIsFormValid(false);
+            return !isFormValid
+        }
+    };
+
     const handleChange = async (e) => {
         const { name, value } = e.target;
         const trimmedValue = value.trim();
         setFormData((prevData) => ({ ...prevData, [name]: trimmedValue }));
 
-        let isFormValid = false;
         let newFormErrors = { ...formErrors };
 
         if (name === "usuario") {
-            if (value.includes(".") && value.includes("@")) {
-                newFormErrors.usuario = "";
-                isFormValid = true;
-            } else {
-                newFormErrors.usuario = "Email inválido";
-                isFormValid = false;
-            }
-
+            setUser(value);
+            setIsUserFilled(!!value);
             const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-            if (emailRegex.test(value)) {
-                newFormErrors.usuario = "";
-                isFormValid = true;
+
+            if (!emailRegex.test(value) || !value.includes(".") || !value.includes("@") || value.length === 0 || !value) {
+                newFormErrors.usuario = <span className="fs-6 text-danger p-0 m-0">* Email inválido</span>;
+                setValidaEmail(false);
+                setIsFormValid(false);
             } else {
-                newFormErrors.usuario = "Email inválido";
-                isFormValid = false;
+                newFormErrors.usuario = false;
+                setValidaEmail(true);
+                validaFormulario(true, validaSenha, validaCSenha);
             }
         }
 
+
         if (name === "senha") {
             setSenha(value);
-            if (value !== confirmSenha) {
-                newFormErrors.senha = "As senhas não coincidem";
-                isFormValid = false;
+            const senhaRegex = /^(?=(?:.*[A-Za-z]){3})(?=(?:.*\W){1})(?=(?:.*\d){4}).{8,}$/;
+
+            if (value !== confirmSenha || value.length !== 8 || value.includes(" ") || !value || !senhaRegex.test(value)) {
+                newFormErrors.senha = (
+                    <span className="fs-6 text-danger p-0 m-0">
+                        * Senha inválida -
+                        <span className="text-primary fw-light fs-6 p-0 m-0">
+                            _ Obrigatório: <br />
+                            <span className="d-flex justify-content-center align-content-center text-center">
+                                3 letras, 1 símbolo e 4 números
+                            </span>
+                        </span>
+                    </span>
+                );
+                setValidaSenha(false);
+                setIsFormValid(false);
             } else {
-                if (value.length < 6 || value.includes(" ")) {
-                    newFormErrors.senha = "A senha deve ter pelo menos 6 caracteres";
-                    isFormValid = false;
-                } else {
-                    newFormErrors.senha = "";
-                    isFormValid = true;
-                }
+                newFormErrors.senha = false;
+                setValidaSenha(true);
+                validaFormulario(validaEmail, true, validaCSenha);
             }
         }
 
         if (name === "confirmSenha") {
             setConfirmSenha(value);
-            if (value !== senha) {
-                newFormErrors.confirmSenha = "As senhas não coincidem";
-                isFormValid = false;
+            const confSenhaRegex = /^(?=(?:.*[A-Za-z]){3})(?=(?:.*\W){1})(?=(?:.*\d){4}).{8,}$/;
+
+
+            if (value !== senha || value.length !== 8 || value.includes(" ") || !value || !confSenhaRegex.test(value)) {
+                newFormErrors.confirmSenha = (
+                    <span className="fs-6 text-danger">
+                        * Não correspondente:
+                    </span>
+                );
+
+                setValidaCSenha(false);
+                setIsFormValid(false);
+
             } else {
-                if (value.length < 6 || value.includes(" ")) {
-                    newFormErrors.confirmSenha = "A senha deve ter pelo menos 6 caracteres e não deve conter espaços em branco";
-                    isFormValid = false;
-                } else {
-                    newFormErrors.confirmSenha = "";
-                    isFormValid = true;
-                }
+                newFormErrors.confirmSenha = "";
+                setValidaCSenha(true)
+                validaFormulario(validaEmail, validaSenha, true);
             }
         }
 
-        if (isFormValid) {
-            newFormErrors.usuario = "";
-            newFormErrors.senha = "";
-            newFormErrors.confirmSenha = "";
-            isFormValid = true;
-        }
-
+        setFormErrors(newFormErrors);
+        setIsUserFilled(!!usuario);
         setIsPasswordFilled(!!senha);
         setIsConfirmPasswordFilled(!!confirmSenha);
-        setIsFormValid(isFormValid);
-        setFormErrors(newFormErrors);
     };
 
 
@@ -255,7 +276,7 @@ const FormCadastroUser = () => {
                                 </OverlayTrigger>
                             </div>
                             {!isFormValid && (
-                                <div className="error-message text-primary text-center fs-6 mt-3 fw-normal">
+                                <div className="error-message text-primary text-center fs-6 m-0 p-0 fw-normal">
                                     * Preencha todos os campos
                                 </div>
                             )}
