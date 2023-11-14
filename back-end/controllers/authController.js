@@ -24,9 +24,9 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign({ userId: usuarioDoBanco.id }, process.env.JWT_SECRET, {
-      expiresIn: 3600, // 1 h
-      //expiresIn: 1800, // 30 min
-      //expiresIn: 900, // 15 min
+      expiresIn: 3600 // 1 h
+      //expiresIn: 1800 // 30 min
+      //expiresIn: 900 // 15 min
     });
 
     res.status(200).json({ token });
