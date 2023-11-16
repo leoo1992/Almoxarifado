@@ -9,3 +9,40 @@
 .btn-menu-tamanho {
     width: 200px;
 }
+
+.img-product {
+    width: 280px;
+}
+
+.custom-tooltip .tooltip-inner {
+    background-color: #81f073;
+    color: #000000;
+    font-weight: bold;
+    border: 3px solid rgb(1, 99, 41); 
+  }
+  
+  .custom-tooltip .arrow::before {
+    border-bottom-color: #81f073;
+  }
+  
+  .custom-tooltip2 .tooltip-inner {
+    background-color: #447cf7;
+    color: #ffffff;
+    font-weight: bold;
+    border: 3px solid #0037ff;
+  }
+  
+  .custom-tooltip2 .arrow::before {
+    border-bottom-color: #447cf7;
+  }
+
+  .custom-tooltip3 .tooltip-inner {
+    background-color: #88e7ff;
+    color: #000000;
+    font-weight: bold;
+    border: 3px solid #6c8bfa;
+  }
+  
+  .custom-tooltip3 .arrow::before {
+    border-bottom-color: #447cf7;
+  }
