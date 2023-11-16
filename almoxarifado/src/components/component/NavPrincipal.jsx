@@ -13,7 +13,7 @@ const NavPrincipal = (props) => {
     };
 
     return (
-        <Navbar bg="primary" data-bs-theme="light" className='flex-row justify-content-between p-1 shadow min-vw-100 mw-100 w-100'>
+        <Navbar bg="primary" data-bs-theme="light" className='flex-row justify-content-between p-1 shadow'>
             <Navbar.Brand className='fw-bold text-white fs-3 p-0 m-0 bg-transparent text-decoration-none text-store-nav'>
                 IA.<span className='text-success'>Store</span>
             </Navbar.Brand>
