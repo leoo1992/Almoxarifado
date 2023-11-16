@@ -21,13 +21,13 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={authenticated ? <HomePage /> : <Login />} />
         <Route path="/cadastro-usuarios" element={authenticated ? <CadastroUser /> : <CadastroUser />} />
-        <Route path="/home" element={!authenticated ? <HomePage /> :<Navigate to="/" />} />
-        {/* <Route path="/cadastro" element={authenticated ? <Cadastro /> : <Navigate to="/" />} />
-        <Route path="/listas" element={authenticated ? <Listas /> : <Navigate to="/" />} />
-        <Route path="/cadastrados" element={authenticated ? <Cadastrados /> : <Navigate to="/" />} />
-        <Route path="/logs" element={authenticated ? <Logs /> : <Navigate to="/" />} />
-        <Route path="/atualiza/:id" element={authenticated ? <Atualiza /> : <Navigate to="/" />} />
-        <Route path="/usuarios" element={authenticated ? <Usuarios /> : <Navigate to="/" />} /> */}
+        <Route path="/home" element={authenticated ? <HomePage /> :<Navigate to="/" />} />
+        
+        {/* 
+        <Route path="/cadastro" element={authenticated ? <Cadastro /> : <Navigate to="/" />} /> //cadastro produto
+        <Route path="/listas" element={authenticated ? <Listas /> : <Navigate to="/" />} /> //lista produto
+        <Route path="/atualiza/:id" element={authenticated ? <Atualiza /> : <Navigate to="/" />} /> //atualiza produto
+        */}
 
       </Routes>
     </Router>
