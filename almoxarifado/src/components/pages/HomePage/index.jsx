@@ -36,9 +36,14 @@ const HomePage = () => {
   const removerTooltip = (
     <Tooltip className="custom-tooltip5 p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>Desativar Material</Tooltip>
   );
+
   const listarTooltip = (
     <Tooltip className="custom-tooltip3 p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>Listar Materiais</Tooltip>
   );
+
+  const handleButtonRetirarClick = () => {
+    window.location.href = '/retirar';
+};
 
   return (
     <>
@@ -48,7 +53,8 @@ const HomePage = () => {
         <MDBRow className='p-2 m-2 d-flex justify-content-start align-content-center align-items-center row-cols-2 row-cols-sm-4 row-cols-md-6 row-cols-lg-8 row-cols-xl-10 g-5'>
           <MDBCol className='d-flex justify-content-center align-content-center align-items-center'>
             <OverlayTrigger placement="bottom" overlay={retirarTooltip} delay={{ show: 250, hide: 400 }}>
-              <MDBBtn className='p-3 m-0 bg-transparent btn-outline-success rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+              <MDBBtn onClick={handleButtonRetirarClick}
+              className='p-3 m-0 bg-transparent btn-outline-success rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
                 <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
                   <FontAwesomeIcon
                     icon={faCubes}
@@ -100,7 +106,7 @@ const HomePage = () => {
 
           <MDBCol className='d-flex justify-content-center align-content-center align-items-center'>
             <OverlayTrigger placement="bottom" overlay={listarTooltip} delay={{ show: 250, hide: 400 }}>
-              <MDBBtn className='p-3 m-0 bg-transparent btn-outline-info rounded-9 shadow-5-strong shadow-5-primary'>
+              <MDBBtn className='p-3 m-1 bg-transparent btn-outline-info rounded-9 shadow-5-strong shadow-5-primary'>
                 <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
                   <FontAwesomeIcon
                     icon={faTableCells}
