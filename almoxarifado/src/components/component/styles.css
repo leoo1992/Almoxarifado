@@ -11,51 +11,61 @@
 }
 
 .img-product {
-    width: 250px;
-    max-width: 250px;
-    min-width: 250px;
+    width: 280px;
 }
 
 .custom-tooltip .tooltip-inner {
     background-color: #81f073;
     color: #000000;
     font-weight: bold;
-    border: 3px solid rgb(1, 99, 41); 
+    border: 3px solid rgb(1, 99, 41);
+    margin: 0px;
+    border-radius: 0.575rem;
+    padding: 0.2rem 
   }
   
-  .custom-tooltip .arrow::before {
-    border-bottom-color: #81f073;
-  }
   
   .custom-tooltip2 .tooltip-inner {
-    background-color: #447cf7;
-    color: #ffffff;
+    background-color: #5389fd;
+    color: #000000;
     font-weight: bold;
     border: 3px solid #0037ff;
+    margin: 0px;
+    border-radius: 0.575rem;
+    padding: 0.2rem
   }
   
-  .custom-tooltip2 .arrow::before {
-    border-bottom-color: #447cf7;
-  }
 
   .custom-tooltip3 .tooltip-inner {
     background-color: #88e7ff;
     color: #000000;
     font-weight: bold;
     border: 3px solid #6c8bfa;
+    margin: 0px;
+    border-radius: 0.575rem;
+    padding: 0.2rem
   }
   
-  .custom-tooltip3 .arrow::before {
-    border-bottom-color: #447cf7;
-  }
-
   .custom-tooltip4 .tooltip-inner {
     background-color: #fff388;
     color: #000000;
     font-weight: bold;
     border: 3px solid #fac16c;
+    margin: 0px;
+    border-radius: 0.575rem;
+    padding: 0.2rem
   }
   
-  .custom-tooltip4 .arrow::before {
-    border-bottom-color: #447cf7;
+  .custom-tooltip5 .tooltip-inner {
+    background-color: #ff8888;
+    color: #000000;
+    font-weight: bold;
+    border: 3px solid #fc4b4b;
+    margin: 0px;
+    border-radius: 0.575rem;
+    padding: 0.2rem
+  }
+  
+  .tamanho-inputs {
+    width: 100px !important;
   }
