@@ -25,9 +25,9 @@ const Menu = () => {
                 <MDBBtn
                     variant="primary"
                     onClick={toggleShow}
-                    className='m-1 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-5 border'
+                    className='m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-5 border'
                 >
-                    <FontAwesomeIcon icon={faBars} className='text-white shadow m-0 p-1 fw-bold fs-5' />
+                    <FontAwesomeIcon icon={faBars} className='text-white shadow m-0 p-2 fw-bold fs-2' />
                 </MDBBtn >
             </OverlayTrigger>
             <Offcanvas
