@@ -18,21 +18,21 @@ const HomePage = () => {
 
   return (
     <>
-      <NavPrincipal updateTheme={updateTheme} className='w-auto d-flex' />
+      <NavPrincipal updateTheme={updateTheme} className='w-100 vw-100 d-flex' />
         <MDBContainer fluid className={`m-0 p-0 pt-4 w-100 vh-100 ${theme === "dark" ? "bg-dark" : "bg-light"}`}>
-          <MDBRow className='d-flex justify-content-around align-content-around align-items-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4'>
+          <MDBRow className='p-0 m-0 d-flex justify-content-around align-content-around align-items-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4'>
             <ProductCard productName="Martelo"  />
             <ProductCard productName="Prego" productImg={require('../../images/prego.png')}/>
             <ProductCard productName="Alicate" />
             <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
-            <ProductCard productName="Chave de Fenda" />
+            <ProductCard productName="Chave de Boca" />
+            <ProductCard productName="Parafuso" />
+            <ProductCard productName="Marreta" />
+            <ProductCard productName="Balde" />
+            <ProductCard productName="Trincha" />
+            <ProductCard productName="Anilha" />
+            <ProductCard productName="Porca" />
+            <ProductCard productName="Arruela" />
           </MDBRow>
         </MDBContainer>
     </>

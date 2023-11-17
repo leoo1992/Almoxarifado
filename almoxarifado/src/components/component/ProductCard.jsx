@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faImage, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,6 @@ import {
 } from 'mdb-react-ui-kit';
 
 const ProductCard = ({ productName, productImg }) => {
-    const [theme, setTheme] = useState("dark");
 
     const itemTooltip = (
         <Tooltip className="custom-tooltip2 p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>{productName || 'item desconhecido'} </Tooltip>
@@ -28,16 +27,15 @@ const ProductCard = ({ productName, productImg }) => {
     const infoTooltip = (
         <Tooltip className="custom-tooltip3 p-0 m-0" id="add-cart" delay={{ show: 250, hide: 400 }}>Informações</Tooltip>
     );
-
-    const updateTheme = (newTheme) => {
-        setTheme(newTheme);
-      };
+    const qtdTooltip = (
+        <Tooltip className="custom-tooltip4 p-0 m-0" id="add-cart" delay={{ show: 250, hide: 400 }}>Quantidade</Tooltip>
+    );
 
     return (
-        <MDBRow className='row-cols g-2 m-0 d-flex justify-content-between align-content-between align-items-center img-product pb-1'>
-            <MDBCol >
+        <MDBRow className='row-cols m-2 d-flex justify-content-between align-content-between align-items-center img-product pb-1'>
+            <MDBCol className='p-0 m-0'>
                 <OverlayTrigger placement="bottom" overlay={itemTooltip} delay={{ show: 250, hide: 400 }}>
-                    <MDBCard shadow border='success' className='rounded-9 border-3 bg-transparent shadow-5-strong' >
+                    <MDBCard shadow border='success' className='rounded-9 border-3 bg-transparent shadow-5-strong p-0 m-0' >
 
                         {productImg ? (
                             <MDBCardImage
@@ -45,10 +43,10 @@ const ProductCard = ({ productName, productImg }) => {
                                 alt='...'
                                 fluid
                                 position='top'
-                                className="rounded-9 p-1 bg-transparent"
+                                className="rounded-9 p-5 m-0 bg-transparent"
                             />
                         ) : (
-                            <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-1 m-5">
+                            <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-5 m-0">
                                 <FontAwesomeIcon
                                     icon={faImage}
                                     className="p-2 m-0 w-100 h-100 text-secondary"
@@ -67,13 +65,14 @@ const ProductCard = ({ productName, productImg }) => {
                             </MDBRow>
                             <MDBRow className='p-0 m-0 p-0 m-0 d-flex justify-content-end 
                                         align-content-end align-items-end text-end'>
-
-                                <input
-                                    type="number"
-                                    placeholder="Qtd"
-                                    className="w-50 p-1 mb-1 rounded-9 text-center bg-body-secondary 
+                                <OverlayTrigger placement="top" overlay={qtdTooltip} delay={{ show: 250, hide: 400 }}>
+                                    <input
+                                        type="number"
+                                        placeholder="Qtd"
+                                        className="w-25 p-1 mb-1 rounded-9 text-center bg-body-secondary 
                                     shadow-5-strong border border-primary border-4"
-                                />
+                                    />
+                                </OverlayTrigger>
 
                                 <OverlayTrigger placement="top" overlay={infoTooltip} delay={{ show: 250, hide: 400 }}>
                                     <MDBBtn
@@ -85,7 +84,7 @@ const ProductCard = ({ productName, productImg }) => {
                                         <FontAwesomeIcon icon={faCircleInfo} className="p-1 m-0 fs-4" />
                                     </MDBBtn>
                                 </OverlayTrigger>
-                                <OverlayTrigger placement="left" overlay={carrinhoTooltip} delay={{ show: 250, hide: 400 }}>
+                                <OverlayTrigger placement="top" overlay={carrinhoTooltip} delay={{ show: 250, hide: 400 }}>
                                     <MDBBtn
                                         size='sm'
                                         className="border border-5 border-success shadow-5-primary 
