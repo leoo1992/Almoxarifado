@@ -13,7 +13,6 @@ import {
     MDBCardOverlay,
     MDBRow,
     MDBCol,
-
 } from 'mdb-react-ui-kit';
 
 const ProductCard = ({ productName, productImg }) => {
@@ -38,13 +37,16 @@ const ProductCard = ({ productName, productImg }) => {
                     <MDBCard shadow border='success' className='rounded-9 border-3 bg-transparent shadow-5-strong p-0 m-0' >
 
                         {productImg ? (
-                            <MDBCardImage
-                                src={productImg}
-                                alt='...'
-                                fluid
-                                position='top'
-                                className="rounded-9 p-5 m-0 bg-transparent"
-                            />
+                            <div className='rounded-9 p-0 m-0'>
+                                <MDBCardImage
+                                    src={productImg}
+                                    alt={productName || 'item desconhecido'}
+                                    tag={productName || 'item desconhecido'}
+                                    fluid
+                                    position='top'
+                                    className="rounded-9 p-1 m-0 bg-transparent"
+                                />
+                            </div>
                         ) : (
                             <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-5 m-0">
                                 <FontAwesomeIcon
@@ -57,8 +59,8 @@ const ProductCard = ({ productName, productImg }) => {
                         <MDBCardOverlay className="d-flex flex-column align-content-between justify-content-between align-items-stretch p-3">
                             <MDBRow className='p-0 m-0 row-cols p-0 m-0 d-flex justify-content-center 
                                             align-content-center align-items-center text-center'>
-                                <MDBCard className="rounded-9 shadow-5-strong bg-primary bg-opacity-0 border border-5 border-success p-1">
-                                    <MDBCardTitle className="p-1 m-0 text-center text-white fw-bolder fs-6">
+                                <MDBCard className="rounded-9 shadow-5-strong bg-primary bg-opacity-0 border border-3 border-success p-0">
+                                    <MDBCardTitle className="p-0 m-0 text-center text-white fw-bolder fs-6">
                                         {productName || 'item desconhecido'}
                                     </MDBCardTitle>
                                 </MDBCard >
@@ -69,15 +71,15 @@ const ProductCard = ({ productName, productImg }) => {
                                     <input
                                         type="number"
                                         placeholder="Qtd"
-                                        className="w-25 p-1 mb-1 rounded-9 text-center bg-body-secondary 
-                                    shadow-5-strong border border-primary border-4"
+                                        className=" tamanho-inputs p-1 mb-1 rounded-9 text-center bg-body-secondary 
+                                    shadow-5-strong border border-primary border-3"
                                     />
                                 </OverlayTrigger>
 
                                 <OverlayTrigger placement="top" overlay={infoTooltip} delay={{ show: 250, hide: 400 }}>
                                     <MDBBtn
                                         size='sm'
-                                        className="border border-5 border-primary shadow-5-primary 
+                                        className="border border-3 border-primary shadow-5-primary 
                                                 fw-bolder p-0 mb-1 rounded-circle w-responsive w-auto
                                                 d-flex justify-content-center align-content-center align-items-center 
                                                 text-center btn-info shadow-5-strong">
@@ -87,7 +89,7 @@ const ProductCard = ({ productName, productImg }) => {
                                 <OverlayTrigger placement="top" overlay={carrinhoTooltip} delay={{ show: 250, hide: 400 }}>
                                     <MDBBtn
                                         size='sm'
-                                        className="border border-5 border-success shadow-5-primary 
+                                        className="border border-3 border-success shadow-5-primary 
                                                 fw-bolder p-0 mb-1 rounded-circle w-responsive w-auto
                                                 d-flex justify-content-center align-content-center align-items-center 
                                                 text-center shadow-5-strong">
