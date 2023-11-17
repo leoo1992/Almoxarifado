@@ -11,7 +11,9 @@
 }
 
 .img-product {
-    width: 280px;
+    width: 250px;
+    max-width: 250px;
+    min-width: 250px;
 }
 
 .custom-tooltip .tooltip-inner {
@@ -44,5 +46,16 @@
   }
   
   .custom-tooltip3 .arrow::before {
+    border-bottom-color: #447cf7;
+  }
+
+  .custom-tooltip4 .tooltip-inner {
+    background-color: #fff388;
+    color: #000000;
+    font-weight: bold;
+    border: 3px solid #fac16c;
+  }
+  
+  .custom-tooltip4 .arrow::before {
     border-bottom-color: #447cf7;
   }
