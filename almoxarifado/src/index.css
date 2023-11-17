@@ -1,8 +1,14 @@
 body {
-  margin: 0;
+  margin: 0px;
+  padding: 0px;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  margin: 0px;
+  padding: 0px;
 }
 
 code {
