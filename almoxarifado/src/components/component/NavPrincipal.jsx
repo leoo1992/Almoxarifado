@@ -7,6 +7,7 @@ import NavIcons from './NavIcons'
 const NavPrincipal = (props) => {
     // eslint-disable-next-line
     const [theme, setTheme] = useState("dark");
+
     const updateTheme = (newTheme) => {
         setTheme(newTheme);
         props.updateTheme(newTheme);
@@ -18,7 +19,7 @@ const NavPrincipal = (props) => {
                 IA.<span className='text-success'>Store</span>
             </Navbar.Brand>
             <Nav className="text-end p-0 m-0">
-                <NavIcons updateTheme={updateTheme} />
+                <NavIcons updateTheme={updateTheme} disableCart={props.disableCart} disableHome={props.disableHome}/>
             </Nav>
         </Navbar>
     );
