@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import Login from "./components/pages/LoginPage";
 import CadastroUser from "./components/pages/CadastroUser";
+import RetiradaPage from "./components/pages/RetiradaPage";
 
 const AppRoutes = () => {
-  const [authenticated, setAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+  const authentic = () => {
+    let token = localStorage.getItem("token");
     if (token) {
-      setAuthenticated(true);
+      return true
     } else {
-      setAuthenticated(false);
+      return false
     }
-  }, []);
+  };
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={authenticated ? <HomePage /> : <Login />} />
-        <Route path="/cadastro-usuarios" element={authenticated ? <CadastroUser /> : <CadastroUser />} />
-        <Route path="/home" element={authenticated ? <HomePage /> :<Navigate to="/" />} />
-        
+        <Route path="/" element={authentic() ? <HomePage /> : <Login />} />
+        <Route path="/cadastro-usuarios" element={authentic() ? <CadastroUser /> : <CadastroUser />} />
+        <Route path="/home" element={authentic() ? <HomePage /> : <Navigate to="/" />} />
+        <Route path="/retirar" element={authentic() ? <RetiradaPage /> : <Navigate to="/" />} />
+
         {/* 
         <Route path="/cadastro" element={authenticated ? <Cadastro /> : <Navigate to="/" />} /> //cadastro produto
         <Route path="/listas" element={authenticated ? <Listas /> : <Navigate to="/" />} /> //lista produto
