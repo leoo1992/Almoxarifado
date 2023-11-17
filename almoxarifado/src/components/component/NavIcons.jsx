@@ -13,6 +13,7 @@ const NavIcons = (props) => {
     const totalCounters = '';
     useEffect(() => {
         props.updateTheme(theme);
+        document.body.className = `bg-${theme}`;
     }, [theme, props]);
 
 
