@@ -22,7 +22,7 @@ const RetiradaPage = () => {
         <MDBContainer fluid className={`m-0 p-0 pt-4 w-100 vh-100 ${theme === "dark" ? "bg-dark data-bs-theme-dark" : "bg-light data-bs-theme-light"}`}>
           <MDBRow className='p-0 m-0 d-flex justify-content-around align-content-around align-items-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4'>
             <ProductCard productName="Martelo"  />
-            <ProductCard productName="Prego"  productImg={require('../../images/prego.png')}/>
+            <ProductCard productName="Prego"  productImg={require('../../images/prego.webp')}/>
             <ProductCard productName="Alicate" />
             <ProductCard productName="Chave de Fenda" />
             <ProductCard productName="Chave de Boca" />
