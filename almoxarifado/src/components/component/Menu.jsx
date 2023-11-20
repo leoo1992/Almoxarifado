@@ -7,8 +7,6 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import {
     MDBBtn,
-    MDBRow,
-    MDBCol,
 } from 'mdb-react-ui-kit';
 
 const Menu = () => {
@@ -21,26 +19,6 @@ const Menu = () => {
         <Tooltip id="menu-tooltip">
             Menu
         </Tooltip>
-    );
-
-    const retirarTooltip = (
-        <Tooltip className="custom-tooltip p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>Retirada de Materiais</Tooltip>
-    );
-
-    const entradaTooltip = (
-        <Tooltip className="custom-tooltip2 p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>Entrada de Materiais</Tooltip>
-    );
-
-    const alterarTooltip = (
-        <Tooltip className="custom-tooltip4 p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>Alterar Material</Tooltip>
-    );
-
-    const removerTooltip = (
-        <Tooltip className="custom-tooltip5 p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>Desativar Material</Tooltip>
-    );
-
-    const listarTooltip = (
-        <Tooltip className="custom-tooltip3 p-0 m-0" id="nome-produto" delay={{ show: 250, hide: 400 }}>Listar Materiais</Tooltip>
     );
 
     const handleButtonRetirarClick = () => {
@@ -80,63 +58,88 @@ const Menu = () => {
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
-
-                    <OverlayTrigger placement="bottom" overlay={retirarTooltip} delay={{ show: 250, hide: 400 }}>
-                        <MDBBtn onClick={handleButtonRetirarClick}
-                            className='p-3 m-0 bg-transparent btn-outline-success rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
-                            <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
-                                <FontAwesomeIcon
-                                    icon={faCubes}
-                                    className="p-0 m-0 text-center text-success w-100 h-100 d-flex justify-content-center align-content-center align-items-center'"
-                                />
-                            </div>
-                        </MDBBtn>
-                    </OverlayTrigger>
-
-                    <OverlayTrigger placement="bottom" overlay={entradaTooltip} delay={{ show: 250, hide: 400 }}>
-                        <MDBBtn className='p-3 m-0 bg-transparent btn-outline-primary rounded-9 shadow-5-strong shadow-5-primary'>
-                            <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
-                                <FontAwesomeIcon
-                                    icon={faShareFromSquare}
-                                    className="p-0 m-0 text-center text-primary w-100 h-100"
-                                />
-                            </div>
-                        </MDBBtn>
-                    </OverlayTrigger>
-
-                    <OverlayTrigger placement="bottom" overlay={alterarTooltip} delay={{ show: 250, hide: 400 }}>
-                        <MDBBtn className='p-3 m-0 bg-transparent btn-outline-warning rounded-9 shadow-5-strong shadow-5-primary'>
-                            <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
-                                <FontAwesomeIcon
-                                    icon={faBoxesStacked}
-                                    className="p-0 m-0 text-center text-warning w-100 h-100"
-                                />
-                            </div>
-                        </MDBBtn>
-                    </OverlayTrigger>
-
-                    <OverlayTrigger placement="bottom" overlay={removerTooltip} delay={{ show: 250, hide: 400 }}>
-                        <MDBBtn className='p-3 m-0 bg-transparent btn-outline-danger rounded-9 shadow-5-strong shadow-5-primary'>
-                            <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
-                                <FontAwesomeIcon
-                                    icon={faPlugCircleExclamation}
-                                    className="p-0 m-0 text-center text-danger w-100 h-100"
-                                />
-                            </div>
-                        </MDBBtn>
-                    </OverlayTrigger>
-
-                    <OverlayTrigger placement="bottom" overlay={listarTooltip} delay={{ show: 250, hide: 400 }}>
-                        <MDBBtn className='p-3 m-1 bg-transparent btn-outline-info rounded-9 shadow-5-strong shadow-5-primary'>
-                            <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
-                                <FontAwesomeIcon
-                                    icon={faTableCells}
-                                    className="p-0 m-0 text-center text-info w-100 h-100"
-                                />
-                            </div>
-                        </MDBBtn>
-                    </OverlayTrigger>
-
+                    <ul className="list-unstyled p-1">
+                        <li className="m-3">
+                            <MDBBtn onClick={handleButtonRetirarClick}
+                                className='menu-btn-tamanho btn-success border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                        <FontAwesomeIcon
+                                            icon={faCubes}
+                                            className="text-white me-2 fs-3 text-start"
+                                        />
+                                    </div>
+                                    <div className="d-flex col-9 justify-content-center align-content-center">
+                                        <h6 className="p-0 m-0 text-white text-center ">Retirada</h6>
+                                    </div>
+                                </div>
+                            </MDBBtn>
+                        </li>
+                        <li className="m-3">
+                            <MDBBtn
+                                className='menu-btn-tamanho bg-primary-emphasis border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                        <FontAwesomeIcon
+                                            icon={faShareFromSquare}
+                                            className="text-white me-2 fs-3 text-start"
+                                        />
+                                    </div>
+                                    <div className="d-flex col-9 justify-content-center align-content-center">
+                                        <h6 className="p-0 m-0 text-white text-center ">Entrada</h6>
+                                    </div>
+                                </div>
+                            </MDBBtn>
+                        </li>
+                        <li className="m-3">
+                            <MDBBtn
+                                className='menu-btn-tamanho btn-warning border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                        <FontAwesomeIcon
+                                            icon={faBoxesStacked}
+                                            className="text-white me-2 fs-3 text-start"
+                                        />
+                                    </div>
+                                    <div className="d-flex col-9 justify-content-center align-content-center">
+                                        <h6 className="p-0 m-0 text-white text-center ">Alterar</h6>
+                                    </div>
+                                </div>
+                            </MDBBtn>
+                        </li>
+                        <li className="m-3">
+                            <MDBBtn
+                                className='menu-btn-tamanho btn-danger border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                        <FontAwesomeIcon
+                                            icon={faPlugCircleExclamation}
+                                            className="text-white me-2 fs-3 text-start"
+                                        />
+                                    </div>
+                                    <div className="d-flex col-8 justify-content-center align-content-center">
+                                        <h6 className="p-0 m-0 text-white text-center ">Desativar</h6>
+                                    </div>
+                                </div>
+                            </MDBBtn>
+                        </li>
+                        <li className="m-3">
+                            <MDBBtn
+                                className='menu-btn-tamanho btn-info border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                        <FontAwesomeIcon
+                                            icon={faTableCells}
+                                            className="text-white me-2 fs-3 text-start"
+                                        />
+                                    </div>
+                                    <div className="d-flex col-9 justify-content-center align-content-center">
+                                        <h6 className="p-0 m-0 text-white text-center ">Listar</h6>
+                                    </div>
+                                </div>
+                            </MDBBtn>
+                        </li>
+                    </ul>
                 </Offcanvas.Body>
             </Offcanvas>
         </>

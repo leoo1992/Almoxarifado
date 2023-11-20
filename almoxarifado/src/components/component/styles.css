@@ -69,3 +69,7 @@
   .tamanho-inputs {
     width: 100px !important;
   }
+
+  .menu-btn-tamanho {
+    width: 200px;
+  }
