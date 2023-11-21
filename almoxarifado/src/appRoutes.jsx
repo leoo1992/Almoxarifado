@@ -2,8 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import Login from "./components/pages/LoginPage";
-import CadastroUser from "./components/pages/CadastroUser";
-import RetiradaPage from "./components/pages/RetiradaPage";
+import CadastroUser from "./components/pages/CadastroUser/CadastroUser";
+import RetiradaPage from "./components/pages/RetiradaPage/RetiradaPage";
+import EntradaPage from "./components/pages/EntradaPage/EntradaPage";
+import AlterarPage from "./components/pages/AlterarPage/AlterarPage";
+import DesativarPage from "./components/pages/DesativarPage/DesativarPage";
+import ListarPage from "./components/pages/ListarPage/ListarPage";
 
 const AppRoutes = () => {
 
@@ -23,13 +27,13 @@ const AppRoutes = () => {
         <Route path="/cadastro-usuarios" element={authentic() ? <CadastroUser /> : <CadastroUser />} />
         <Route path="/home" element={authentic() ? <HomePage /> : <Navigate to="/" />} />
         <Route path="/retirar" element={authentic() ? <RetiradaPage /> : <Navigate to="/" />} />
-
+        <Route path="/entrada" element={authentic() ? <EntradaPage /> : <Navigate to="/" />} />
+        <Route path="/alterar" element={authentic() ? <AlterarPage /> : <Navigate to="/" />} />
+        <Route path="/desativar" element={authentic() ? <DesativarPage /> : <Navigate to="/" />} />
+        <Route path="/listar" element={authentic() ? <ListarPage /> : <Navigate to="/" />} />
         {/* 
-        <Route path="/cadastro" element={authenticated ? <Cadastro /> : <Navigate to="/" />} /> //cadastro produto
-        <Route path="/listas" element={authenticated ? <Listas /> : <Navigate to="/" />} /> //lista produto
         <Route path="/atualiza/:id" element={authenticated ? <Atualiza /> : <Navigate to="/" />} /> //atualiza produto
         */}
-
       </Routes>
     </Router>
   );
