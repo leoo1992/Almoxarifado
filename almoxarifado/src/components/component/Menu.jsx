@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faShareFromSquare, faCubes, faBoxesStacked, faTableCells, faPlugCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import { Link } from 'react-router-dom';
 import {
     MDBBtn,
 } from 'mdb-react-ui-kit';
@@ -20,10 +21,6 @@ const Menu = () => {
             Menu
         </Tooltip>
     );
-
-    const handleButtonRetirarClick = () => {
-        window.location.href = '/retirar';
-    };
 
     return (
         <>
@@ -60,84 +57,94 @@ const Menu = () => {
                 <Offcanvas.Body>
                     <ul className="list-unstyled p-1">
                         <li className="m-3">
-                            <MDBBtn onClick={handleButtonRetirarClick}
-                                className='menu-btn-tamanho btn-success border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
-                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
-                                        <FontAwesomeIcon
-                                            icon={faCubes}
-                                            className="text-white me-2 fs-3 text-start"
-                                        />
+                            <Link to="/retirar">
+                                <MDBBtn
+                                    className='menu-btn-tamanho btn-success border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                    <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                        <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                            <FontAwesomeIcon
+                                                icon={faCubes}
+                                                className="text-white me-2 fs-3 text-start"
+                                            />
+                                        </div>
+                                        <div className="d-flex col-9 justify-content-center align-content-center">
+                                            <h6 className="p-0 m-0 text-white text-center ">Retirada</h6>
+                                        </div>
                                     </div>
-                                    <div className="d-flex col-9 justify-content-center align-content-center">
-                                        <h6 className="p-0 m-0 text-white text-center ">Retirada</h6>
-                                    </div>
-                                </div>
-                            </MDBBtn>
+                                </MDBBtn>
+                            </Link>
                         </li>
                         <li className="m-3">
-                            <MDBBtn
-                                className='menu-btn-tamanho bg-primary-emphasis border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
-                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
-                                        <FontAwesomeIcon
-                                            icon={faShareFromSquare}
-                                            className="text-white me-2 fs-3 text-start"
-                                        />
+                            <Link to="/entrada">
+                                <MDBBtn
+                                    className='menu-btn-tamanho bg-primary-emphasis border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                    <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                        <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                            <FontAwesomeIcon
+                                                icon={faShareFromSquare}
+                                                className="text-white me-2 fs-3 text-start"
+                                            />
+                                        </div>
+                                        <div className="d-flex col-9 justify-content-center align-content-center">
+                                            <h6 className="p-0 m-0 text-white text-center ">Entrada</h6>
+                                        </div>
                                     </div>
-                                    <div className="d-flex col-9 justify-content-center align-content-center">
-                                        <h6 className="p-0 m-0 text-white text-center ">Entrada</h6>
-                                    </div>
-                                </div>
-                            </MDBBtn>
+                                </MDBBtn>
+                            </Link>
                         </li>
                         <li className="m-3">
-                            <MDBBtn
-                                className='menu-btn-tamanho btn-warning border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
-                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
-                                        <FontAwesomeIcon
-                                            icon={faBoxesStacked}
-                                            className="text-white me-2 fs-3 text-start"
-                                        />
+                            <Link to="/alterar">
+                                <MDBBtn
+                                    className='menu-btn-tamanho btn-warning border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                    <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                        <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                            <FontAwesomeIcon
+                                                icon={faBoxesStacked}
+                                                className="text-white me-2 fs-3 text-start"
+                                            />
+                                        </div>
+                                        <div className="d-flex col-9 justify-content-center align-content-center">
+                                            <h6 className="p-0 m-0 text-white text-center ">Alterar</h6>
+                                        </div>
                                     </div>
-                                    <div className="d-flex col-9 justify-content-center align-content-center">
-                                        <h6 className="p-0 m-0 text-white text-center ">Alterar</h6>
-                                    </div>
-                                </div>
-                            </MDBBtn>
+                                </MDBBtn>
+                            </Link>
                         </li>
                         <li className="m-3">
-                            <MDBBtn
-                                className='menu-btn-tamanho btn-danger border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
-                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
-                                        <FontAwesomeIcon
-                                            icon={faPlugCircleExclamation}
-                                            className="text-white me-2 fs-3 text-start"
-                                        />
+                            <Link to="/desativar">
+                                <MDBBtn
+                                    className='menu-btn-tamanho btn-danger border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                    <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                        <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                            <FontAwesomeIcon
+                                                icon={faPlugCircleExclamation}
+                                                className="text-white me-2 fs-3 text-start"
+                                            />
+                                        </div>
+                                        <div className="d-flex col-8 justify-content-center align-content-center">
+                                            <h6 className="p-0 m-0 text-white text-center ">Desativar</h6>
+                                        </div>
                                     </div>
-                                    <div className="d-flex col-8 justify-content-center align-content-center">
-                                        <h6 className="p-0 m-0 text-white text-center ">Desativar</h6>
-                                    </div>
-                                </div>
-                            </MDBBtn>
+                                </MDBBtn>
+                            </Link>
                         </li>
                         <li className="m-3">
-                            <MDBBtn
-                                className='menu-btn-tamanho btn-info border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
-                                <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-                                    <div className="d-flex flex-column col-3 justify-content-start align-content-start">
-                                        <FontAwesomeIcon
-                                            icon={faTableCells}
-                                            className="text-white me-2 fs-3 text-start"
-                                        />
+                            <Link to="/listar">
+                                <MDBBtn
+                                    className='menu-btn-tamanho btn-info border rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                                    <div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
+                                        <div className="d-flex flex-column col-3 justify-content-start align-content-start">
+                                            <FontAwesomeIcon
+                                                icon={faTableCells}
+                                                className="text-white me-2 fs-3 text-start"
+                                            />
+                                        </div>
+                                        <div className="d-flex col-9 justify-content-center align-content-center">
+                                            <h6 className="p-0 m-0 text-white text-center ">Listar</h6>
+                                        </div>
                                     </div>
-                                    <div className="d-flex col-9 justify-content-center align-content-center">
-                                        <h6 className="p-0 m-0 text-white text-center ">Listar</h6>
-                                    </div>
-                                </div>
-                            </MDBBtn>
+                                </MDBBtn>
+                            </Link>
                         </li>
                     </ul>
                 </Offcanvas.Body>

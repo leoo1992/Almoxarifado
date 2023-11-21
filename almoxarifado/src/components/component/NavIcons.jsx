@@ -7,6 +7,7 @@ import { faSun, faMoon, faSignOutAlt, faShoppingBasket, faHome } from "@fortawes
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 
 const NavIcons = (props) => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
@@ -67,11 +68,6 @@ const NavIcons = (props) => {
         </Tooltip>
     );
 
-    const handleButtonHomeClick = () => {
-        window.location.href = '/';
-    };
-
-
     return (
         <div className="d-flex flex-wrap m-0 p-0 align-items-center gap-1 justify-content-center  align-content-center">
 
@@ -112,16 +108,17 @@ const NavIcons = (props) => {
 
             {!props.disableHome ? (
                 <OverlayTrigger placement="bottom" overlay={homeTooltip}>
-                    <MDBBtn
-                        onClick={handleButtonHomeClick}
-                        className='m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border'
-                        size='lg'
-                        color='primary'
-                    >
-                        <FontAwesomeIcon icon={faHome}
-                            className='text-white m-0 p-2 fs-3 '
-                        />
-                    </MDBBtn>
+                    <Link to="/">
+                        <MDBBtn
+                            className='m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border'
+                            size='lg'
+                            color='primary'
+                        >
+                            <FontAwesomeIcon icon={faHome}
+                                className='text-white m-0 p-2 fs-3 '
+                            />
+                        </MDBBtn>
+                    </Link>
                 </OverlayTrigger>
             ) : (
                 <div className='d-none p-0 m-0'></div>
