@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import HomePage from "./components/pages/HomePage";
-import Login from "./components/pages/LoginPage";
+import HomePage from "./components/pages/HomePage/HomePage";
+import Login from "./components/pages/LoginPage/LoginPage";
 import CadastroUser from "./components/pages/CadastroUser/CadastroUser";
 import RetiradaPage from "./components/pages/RetiradaPage/RetiradaPage";
 import EntradaPage from "./components/pages/EntradaPage/EntradaPage";
