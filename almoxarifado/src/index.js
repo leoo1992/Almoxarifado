@@ -19,16 +19,16 @@ const cookies = Cookies.get();
 // console.debug = () => { };
 
 if (timeToken.getHours() < new Date().getHours()) {
-    localStorage.removeItem('token');
-    Cookies.remove(cookies);
-    localStorage.clear();
-    sessionStorage.clear();
+	localStorage.removeItem('token');
+	Cookies.remove(cookies);
+	localStorage.clear();
+	sessionStorage.clear();
 }
 
 const render = () => {
-    ReactDOM.createRoot(root).render(
-        <App />
-    );
+	ReactDOM.createRoot(root).render(
+		<App />
+	);
 };
 
 render();

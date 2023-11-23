@@ -4,19 +4,30 @@ import './styles.css';
 import Menu from './Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MDBBtn } from 'mdb-react-ui-kit';
-import { faSun, faMoon, faSignOutAlt, faShoppingBasket, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon, faSignOutAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
+import Cart from './Cart';
 
 const NavIcons = (props) => {
 	const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
-	const totalCounters = '';
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 	useEffect(() => {
 		props.updateTheme(theme);
 		document.body.className = `bg-${theme} data-bs-theme-${theme}`;
+
+		const handleResize = () => {
+			setWindowWidth(window.innerWidth);
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
 	}, [theme, props]);
 
 	const handlelogout = () => {
@@ -46,6 +57,7 @@ const NavIcons = (props) => {
 		const newTheme = theme === 'dark' ? 'light' : 'dark';
 		setTheme(newTheme);
 		localStorage.setItem('theme', newTheme);
+		window.postMessage({ theme: newTheme }, window.location.origin);
 		props.updateTheme(newTheme);
 	};
 
@@ -63,29 +75,11 @@ const NavIcons = (props) => {
 		</Tooltip>
 	);
 
-	const shoppingTooltip = (
-		<Tooltip id="shopping-tooltip">
-      Carrinho
-		</Tooltip>
-	);
-
 	return (
 		<div className="d-flex flex-wrap m-0 p-0 align-items-center gap-1 justify-content-center  align-content-center">
 
 			{!props.disableCart ? (
-				<OverlayTrigger placement="bottom" overlay={shoppingTooltip}>
-					<MDBBtn
-						rounded
-						className="m-0 p-1 d-flex justify-content-center align-content-center align-items-center fw-bold shadow border bg-primary "
-						size="lg"
-						color="none"
-					>
-						<span className="badge rounded-9 text-white fw-bold m-0 rounded-circle bg-success ">{totalCounters}</span>
-						<FontAwesomeIcon icon={faShoppingBasket}
-							className="text-white m-0 p-1 rounded-circle fs-3 "
-						/>
-					</MDBBtn>
-				</OverlayTrigger>
+				<Cart />
 			) : (
 				<div className="d-none p-0 m-0"></div>
 			)}
@@ -94,15 +88,15 @@ const NavIcons = (props) => {
 				<MDBBtn
 					onClick={handleToggleTheme}
 					floating
-					className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold border"
-					size="lg"
+					className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center border"
 					color="none"
+					size= {windowWidth < 370 ? 'sm' : 'lg'}
 					id="trocaTema"
 				>
 					{theme === 'dark' ? (
-						<FontAwesomeIcon icon={faSun} className="text-black bg-warning m-0 p-3 rounded-circle fs-3 w-75 h-75" />
+						<FontAwesomeIcon icon={faSun}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-warning m-0 rounded-circle ${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} `} />
 					) : (
-						<FontAwesomeIcon icon={faMoon} className="text-black bg-info m-0 p-3 rounded-circle fs-3 w-75 h-75" />
+						<FontAwesomeIcon icon={faMoon}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-info m-0 rounded-circle ${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} `} />
 					)}
 				</MDBBtn>
 			</OverlayTrigger>
@@ -112,11 +106,11 @@ const NavIcons = (props) => {
 					<Link to="/">
 						<MDBBtn
 							className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border"
-							size="lg"
+							size= {windowWidth < 370 ? 'sm' : 'lg'}
 							color="primary"
 						>
 							<FontAwesomeIcon icon={faHome}
-								className="text-white m-0 p-2 fs-3 "
+								className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'}`} 
 							/>
 						</MDBBtn>
 					</Link>
@@ -129,11 +123,11 @@ const NavIcons = (props) => {
 				<MDBBtn
 					onClick={handlelogout}
 					className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border"
-					size="lg"
+					size= {windowWidth < 370 ? 'sm' : 'lg'}
 					color="primary"
 				>
 					<FontAwesomeIcon icon={faSignOutAlt}
-						className="text-white m-0 p-2 fs-3  "
+						className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'}`}  
 					/>
 				</MDBBtn>
 			</OverlayTrigger>
