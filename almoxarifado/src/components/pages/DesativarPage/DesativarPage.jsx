@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavPrincipal from "../../component/NavPrincipal";
+import NavPrincipal from '../../component/NavPrincipal';
 import {
   MDBContainer,
 } from 'mdb-react-ui-kit';
@@ -13,14 +13,14 @@ function DesativarPage() {
   };
   return (
     <>
-      <NavPrincipal updateTheme={updateTheme} disableCart={true} disableHome={false} className='w-100 vw-100 d-flex' />
-      <MDBContainer fluid className={`m-0 p-0 pt-4 w-100 vh-100 ${theme === "dark" ? "bg-dark data-bs-theme-dark text-white" : "bg-light data-bs-theme-light text-black"}`}>
-        <h1 className='text-center'>Desativar</h1>
+      <NavPrincipal updateTheme={updateTheme} disableCart={true} disableHome={false} className="w-100 vw-100 d-flex" />
+      <MDBContainer fluid className={`m-0 p-0 pt-4 w-100 vh-100 ${theme === 'dark' ? 'bg-dark data-bs-theme-dark text-white' : 'bg-light data-bs-theme-light text-black'}`}>
+        <h1 className="text-center">Desativar</h1>
 
       </MDBContainer>
     </>
-  )
+  );
 }
 
 
-export default DesativarPage
+export default DesativarPage;

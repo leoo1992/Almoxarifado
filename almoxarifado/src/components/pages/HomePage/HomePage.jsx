@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import "./home.css";
-import NavPrincipal from "../../component/NavPrincipal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShareFromSquare, faCubes, faBoxesStacked, faTableCells, faPlugCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import './home.css';
+import NavPrincipal from '../../component/NavPrincipal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShareFromSquare, faCubes, faBoxesStacked, faTableCells, faPlugCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Footer from '../../component/Footer';
@@ -45,15 +45,15 @@ const HomePage = () => {
 
   return (
     <>
-      <NavPrincipal updateTheme={updateTheme} disableCart={true} disableHome={true} className='w-100 vw-100 d-flex' />
-      <MDBContainer fluid className={`m-0 p-0 vh-100 min-vh-100 ${theme === "dark" ? "bg-dark data-bs-theme-dark" : "bg-light data-bs-theme-light"}`}>
+      <NavPrincipal updateTheme={updateTheme} disableCart={true} disableHome={true} className="w-100 vw-100 d-flex" />
+      <MDBContainer fluid className={`m-0 p-0 vh-100 min-vh-100 ${theme === 'dark' ? 'bg-dark data-bs-theme-dark' : 'bg-light data-bs-theme-light'}`}>
 
-        <MDBRow className='p-2 m-2 d-flex justify-content-start align-content-center align-items-center row-cols-2 row-cols-sm-4 row-cols-md-6 row-cols-lg-8 row-cols-xl-10 g-5'>
-          <MDBCol className='d-flex justify-content-center align-content-center align-items-center'>
+        <MDBRow className="p-2 m-2 d-flex justify-content-start align-content-center align-items-center row-cols-2 row-cols-sm-4 row-cols-md-6 row-cols-lg-8 row-cols-xl-10 g-5">
+          <MDBCol className="d-flex justify-content-center align-content-center align-items-center">
             <OverlayTrigger placement="bottom" overlay={retirarTooltip} delay={{ show: 250, hide: 400 }}>
               <Link to="/retirar">
                 <MDBBtn
-                  className='p-3 m-0 bg-transparent btn-outline-success rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center'>
+                  className="p-3 m-0 bg-transparent btn-outline-success rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center">
                   <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
                     <FontAwesomeIcon
                       icon={faCubes}
@@ -65,11 +65,11 @@ const HomePage = () => {
             </OverlayTrigger>
           </MDBCol>
 
-          <MDBCol className='d-flex justify-content-center align-content-center align-items-center'>
+          <MDBCol className="d-flex justify-content-center align-content-center align-items-center">
             <OverlayTrigger placement="bottom" overlay={entradaTooltip} delay={{ show: 250, hide: 400 }}>
               <Link to="/entrada">
                 <MDBBtn
-                  className='p-3 m-0 bg-transparent btn-outline-primary rounded-9 shadow-5-strong shadow-5-primary'>
+                  className="p-3 m-0 bg-transparent btn-outline-primary rounded-9 shadow-5-strong shadow-5-primary">
                   <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
                     <FontAwesomeIcon
                       icon={faShareFromSquare}
@@ -81,11 +81,11 @@ const HomePage = () => {
             </OverlayTrigger>
           </MDBCol>
 
-          <MDBCol className='d-flex justify-content-center align-content-center align-items-center'>
+          <MDBCol className="d-flex justify-content-center align-content-center align-items-center">
             <OverlayTrigger placement="bottom" overlay={alterarTooltip} delay={{ show: 250, hide: 400 }}>
               <Link to="/alterar">
                 <MDBBtn
-                  className='p-3 m-0 bg-transparent btn-outline-warning rounded-9 shadow-5-strong shadow-5-primary'>
+                  className="p-3 m-0 bg-transparent btn-outline-warning rounded-9 shadow-5-strong shadow-5-primary">
                   <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
                     <FontAwesomeIcon
                       icon={faBoxesStacked}
@@ -97,11 +97,11 @@ const HomePage = () => {
             </OverlayTrigger>
           </MDBCol>
 
-          <MDBCol className='d-flex justify-content-center align-content-center align-items-center'>
+          <MDBCol className="d-flex justify-content-center align-content-center align-items-center">
             <OverlayTrigger placement="bottom" overlay={removerTooltip} delay={{ show: 250, hide: 400 }}>
               <Link to="/desativar">
                 <MDBBtn
-                  className='p-3 m-0 bg-transparent btn-outline-danger rounded-9 shadow-5-strong shadow-5-primary'>
+                  className="p-3 m-0 bg-transparent btn-outline-danger rounded-9 shadow-5-strong shadow-5-primary">
                   <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
                     <FontAwesomeIcon
                       icon={faPlugCircleExclamation}
@@ -113,11 +113,11 @@ const HomePage = () => {
             </OverlayTrigger>
           </MDBCol>
 
-          <MDBCol className='d-flex justify-content-center align-content-center align-items-center'>
+          <MDBCol className="d-flex justify-content-center align-content-center align-items-center">
             <OverlayTrigger placement="bottom" overlay={listarTooltip} delay={{ show: 250, hide: 400 }}>
               <Link to="/listar">
                 <MDBBtn
-                  className='p-3 m-1 bg-transparent btn-outline-info rounded-9 shadow-5-strong shadow-5-primary'>
+                  className="p-3 m-1 bg-transparent btn-outline-info rounded-9 shadow-5-strong shadow-5-primary">
                   <div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
                     <FontAwesomeIcon
                       icon={faTableCells}
