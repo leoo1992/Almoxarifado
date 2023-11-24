@@ -30,6 +30,18 @@ const NavIcons = (props) => {
 		};
 	}, [theme, props]);
 
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowWidth(window.innerWidth);
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
 	const handlelogout = () => {
 		const cookies = Cookies.get();
 		for (const cookie in cookies) {
@@ -94,9 +106,11 @@ const NavIcons = (props) => {
 					id="trocaTema"
 				>
 					{theme === 'dark' ? (
-						<FontAwesomeIcon icon={faSun}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-warning m-0 rounded-circle ${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} `} />
+						<FontAwesomeIcon icon={faSun}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-warning m-0 rounded-circle 
+						${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} ${windowWidth < 340 ? 'fs-6 p-1 w-25 h-25' : ''}`} />
 					) : (
-						<FontAwesomeIcon icon={faMoon}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-info m-0 rounded-circle ${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} `} />
+						<FontAwesomeIcon icon={faMoon}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-info m-0 rounded-circle 
+						${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} ${windowWidth < 340 ? 'fs-6 p-1 w-25 h-25' : ''}`} />
 					)}
 				</MDBBtn>
 			</OverlayTrigger>
@@ -110,7 +124,7 @@ const NavIcons = (props) => {
 							color="primary"
 						>
 							<FontAwesomeIcon icon={faHome}
-								className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'}`} 
+								className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'} ${windowWidth < 340 ? 'fs-6 p-1' : ''} `} 
 							/>
 						</MDBBtn>
 					</Link>
@@ -127,7 +141,7 @@ const NavIcons = (props) => {
 					color="primary"
 				>
 					<FontAwesomeIcon icon={faSignOutAlt}
-						className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'}`}  
+						className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'}  ${windowWidth < 340 ? 'fs-6 p-1' : ''}`}  
 					/>
 				</MDBBtn>
 			</OverlayTrigger>
