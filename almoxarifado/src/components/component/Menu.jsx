@@ -75,7 +75,7 @@ const Menu = () => {
 				autoFocus
 				enforceFocus
 				restoreFocus
-				className={`m-1 hover-menu menu-tamanho w-auto shadow-6-strong ${theme === 'dark' ? 'bg-dark data-bs-theme-dark text-white border border-white' : 'bg-light data-bs-theme-light text-black border border-dark'}`}
+				className={`m-1 hover-menu menu-tamanho w-auto shadow-6-strong d-flex ${theme === 'dark' ? 'bg-dark data-bs-theme-dark text-white border border-white' : 'bg-light data-bs-theme-light text-black border border-dark'}`}
 			>
 				<Offcanvas.Header
 					closeButton
@@ -86,7 +86,7 @@ const Menu = () => {
 					</Offcanvas.Title>
 				</Offcanvas.Header>
 
-				<Offcanvas.Body>
+				<Offcanvas.Body className='d-flex justify-content-center'>
 					<ul className="list-unstyled p-1">
 						<li className="m-3">
 							<Link to="/retirar">
