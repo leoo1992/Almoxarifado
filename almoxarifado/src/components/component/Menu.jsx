@@ -11,6 +11,7 @@ import { MDBBtn } from 'mdb-react-ui-kit';
 const Menu = () => {
 	const [show, setShow] = useState(false);
 	const [theme, setTheme] = useState('dark');
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 	const handleClose = () => setShow(false);
 	const toggleShow = () => {
@@ -34,9 +35,19 @@ const Menu = () => {
 	useEffect(() => {
 		const getThemeFromLocalStorage = () => {
 			const storedTheme = localStorage.getItem('theme');
+
+			const handleResize = () => {
+				setWindowWidth(window.innerWidth);
+			};
+			window.addEventListener('resize', handleResize);
+
 			if (storedTheme) {
 				setTheme(storedTheme);
 			}
+
+			return () => {
+				window.removeEventListener('resize', handleResize);
+			};
 		};
 
 		getThemeFromLocalStorage();
@@ -48,10 +59,10 @@ const Menu = () => {
 				<MDBBtn
 					variant="primary"
 					onClick={toggleShow}
-
+					size= {windowWidth < 370 ? 'sm' : 'lg'}
 					className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-5 border"
 				>
-					<FontAwesomeIcon icon={faBars} className=" shadow m-0 p-2 fw-bold fs-2" />
+					<FontAwesomeIcon icon={faBars} className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6 ' : 'fs-3'}`}  />
 				</MDBBtn >
 			</OverlayTrigger>
 			<Offcanvas
