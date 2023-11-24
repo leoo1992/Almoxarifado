@@ -6,7 +6,7 @@ import { MDBBtn, MDBRow, MDBContainer, MDBBtnGroup } from 'mdb-react-ui-kit';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import ProductCard from './ProductCard';
+import Products from './Products';
 
 function Cart() {
 	const totalCounters = useState(999);
@@ -95,14 +95,7 @@ function Cart() {
 				<Offcanvas.Body className='d-flex justify-content-center'>
 					<MDBContainer fluid className='m-0 p-0'>
 						<MDBRow className="p-0 m-0 d-flex justify-content-around align-content-around align-items-center row-cols-1 product-tamanho">
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
+							<Products />
 						</MDBRow>
 					</MDBContainer>
 				</Offcanvas.Body>

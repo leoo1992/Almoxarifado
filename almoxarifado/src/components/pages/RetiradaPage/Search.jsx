@@ -11,6 +11,7 @@ function Search() {
 	const [theme, setTheme] = useState(localStorage.getItem('theme'));
 	
 	const handleStorageChange = () => {
+
 		const updatedTheme = localStorage.getItem('theme');
 		if (updatedTheme) {
 			setTheme(updatedTheme);
@@ -66,13 +67,15 @@ function Search() {
 						size='sm'
 						id='searchfield'
 						label='Procurar'
+						placeholder='Procurar'
 						className='rounded-9'
 						contrast
 						onFocus={handleInputFocus}
 						onBlur={handleInputBlur}
 						ref={inputRef}
 						value={search}
-						onChange={(e) => setSearch(e.target.value)}
+						onChange={({target}) => setSearch(target.value)}
+						required
 					/>
 				</MDBCol>
 			</MDBRow>

@@ -16,7 +16,10 @@ import {
 	MDBCol,
 } from 'mdb-react-ui-kit';
 
-const ProductCard = ({ productName, productImg }) => {
+const ProductCard = ({ data }) => {
+
+	//eslint-disable-next-line
+	const {title, thumbnail} = data || {};
 
 	const carrinhoTooltip = (
 		<Tooltip className="custom-tooltip p-0 m-0" id="add-cart">Adicionar ao carrinho</Tooltip>
@@ -31,14 +34,14 @@ const ProductCard = ({ productName, productImg }) => {
 	return (
 		<MDBRow className="row-cols m-2 d-flex justify-content-between align-content-between align-items-center img-product pb-1">
 			<MDBCol className="p-0 m-0">
-				<MDBCard shadow border="success" className="rounded-9 border-3 bg-transparent shadow-5-strong p-0 m-0" >
 
-					{productImg ? (
+				<MDBCard shadow border="success" className="rounded-9 border-3 bg-transparent shadow-5-strong p-0 m-0" >
+					{thumbnail ? (
 						<div className="rounded-9 p-0 m-0">
 							<MDBCardImage
-								src={productImg}
-								alt={productName || 'item desconhecido'}
-								tag={productName || 'item desconhecido'}
+								src={thumbnail}
+								alt={title || 'item desconhecido'}
+								tag={title || 'item desconhecido'}
 								fluid
 								position="top"
 								className="rounded-9 p-1 m-0 bg-transparent"
@@ -57,8 +60,8 @@ const ProductCard = ({ productName, productImg }) => {
 						<MDBRow className="p-0 m-0 row-cols p-0 m-0 d-flex justify-content-center 
                                             align-content-center align-items-center text-center">
 							<MDBCard className="rounded-9 shadow-5-strong bg-primary bg-opacity-0 border border-3 border-success p-0">
-								<MDBCardTitle className="p-0 m-0 text-center text-white fw-bolder fs-6">
-									{productName || 'item desconhecido'}
+								<MDBCardTitle className="p-2 m-0 text-center text-white fw-bolder fs-6">
+									{title || 'item desconhecido'}
 								</MDBCardTitle>
 							</MDBCard >
 						</MDBRow>
