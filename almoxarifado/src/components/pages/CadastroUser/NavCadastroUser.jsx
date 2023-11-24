@@ -19,8 +19,7 @@ const NavCadastroUser = () => {
 						className="fw-bold text-white border shadow"
 						rounded
 						color="success"
-					>
-                        Login
+					>Login
 					</MDBBtn>
 				</OverlayTrigger>
 			</Nav>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavPrincipal from '../../component/NavPrincipal';
+import Footer from '../../component/Footer';
 import {
 	MDBContainer,
 } from 'mdb-react-ui-kit';
@@ -18,6 +19,7 @@ function EntradaPage() {
 				<h1 className="text-center">Entrada</h1>
 
 			</MDBContainer>
+			<Footer />
 		</>
 	);
 }

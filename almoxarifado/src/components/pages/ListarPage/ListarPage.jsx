@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import NavPrincipal from '../../component/NavPrincipal';
+import Footer from '../../component/Footer';
 import {
 	MDBContainer,
 } from 'mdb-react-ui-kit';
 
 function ListarPage() {
 	// eslint-disable-next-line
-  const [theme, setTheme] = useState("dark");
+	const [theme, setTheme] = useState("dark");
 
 	const updateTheme = (newTheme) => {
 		setTheme(newTheme);
@@ -18,6 +19,7 @@ function ListarPage() {
 				<h1 className="text-center">Listar</h1>
 
 			</MDBContainer>
+			<Footer />
 		</>
 	);
 }

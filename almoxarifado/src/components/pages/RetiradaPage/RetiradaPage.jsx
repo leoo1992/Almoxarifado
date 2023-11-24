@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './retirar.css';
-
+import Footer from '../../component/Footer';
 import NavPrincipal from '../../component/NavPrincipal';
 import ProductCard from '../../component/ProductCard';
 import { pregoImage} from '../../images';
@@ -38,6 +38,7 @@ const RetiradaPage = () => {
 					<ProductCard productName="Porca" />
 					<ProductCard productName="Arruela" />
 				</MDBRow>
+				<Footer />
 			</MDBContainer >
 		</>
 	);
