@@ -58,7 +58,7 @@ function Search() {
 				<MDBCol
 					onClick={handleColClick}
 					className={`d-flex justify-content-center align-content-center align-items-center p-4 rounded-9 m-0 gap-1 
-     rounded shadow-5-strong ${isFocused ? 'opacity-100' : 'opacity-25'} ${theme=== 'light' ? 'bg-success opacity-50' :'bg-dark'}`}
+     rounded shadow-5-strong ${isFocused ? 'opacity-100' : 'opacity-50'} ${theme=== 'light' ? 'bg-success' :'bg-primary'}`}
 				>
 					<FontAwesomeIcon icon={faSearch} className='m-0 p-0 text-white' />
 					<MDBInput
