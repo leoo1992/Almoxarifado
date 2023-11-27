@@ -1,11 +1,8 @@
-import { React, useState, useEffect } from 'react';
-import './styles.css';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faShareFromSquare, faCubes, faBoxesStacked, faTableCells, faPlugCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { OverlayTrigger, Tooltip, Offcanvas } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faCubes, faShareFromSquare, faBoxesStacked, faPlugCircleExclamation, faTableCells } from '@fortawesome/free-solid-svg-icons';
 import { MDBBtn } from 'mdb-react-ui-kit';
 
 const Menu = () => {
@@ -16,42 +13,32 @@ const Menu = () => {
 	const handleClose = () => setShow(false);
 	const toggleShow = () => {
 		setShow((s) => !s);
-		const getThemeFromLocalStorage = () => {
-			const storedTheme = localStorage.getItem('theme');
-			if (storedTheme) {
-				setTheme(storedTheme);
-			}
-		};
-
 		getThemeFromLocalStorage();
 	};
+
+	const getThemeFromLocalStorage = () => {
+		const storedTheme = localStorage.getItem('theme');
+		if (storedTheme) {
+			setTheme(storedTheme);
+		}
+	};
+
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	const menuTooltip = (
 		<Tooltip id="menu-tooltip">
       Menu
 		</Tooltip>
 	);
-
-	useEffect(() => {
-		const getThemeFromLocalStorage = () => {
-			const storedTheme = localStorage.getItem('theme');
-
-			const handleResize = () => {
-				setWindowWidth(window.innerWidth);
-			};
-			window.addEventListener('resize', handleResize);
-
-			if (storedTheme) {
-				setTheme(storedTheme);
-			}
-
-			return () => {
-				window.removeEventListener('resize', handleResize);
-			};
-		};
-
-		getThemeFromLocalStorage();
-	}, []);
 
 	return (
 		<>

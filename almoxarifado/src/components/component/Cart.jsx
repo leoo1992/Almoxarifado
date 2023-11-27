@@ -9,50 +9,44 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Products from './Products';
 
 function Cart() {
-	const totalCounters = useState(999);
+	//eslint-disable-next-line
+	const [totalCounters, setTotalCounters] = useState(999);
 	const [showCart, setShowCart] = useState(false);
 	const [theme, setTheme] = useState('dark');
-	const handleCloseCart = () => setShowCart(false);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+	const handleCloseCart = () => setShowCart(false);
 
 	const toggleShowCart = () => {
 		setShowCart((s) => !s);
-		const getThemeFromLocalStorage = () => {
-			const storedTheme = localStorage.getItem('theme');
-			if (storedTheme) {
-				setTheme(storedTheme);
-			}
-		};
-
 		getThemeFromLocalStorage();
 	};
+
+	const getThemeFromLocalStorage = () => {
+		const storedTheme = localStorage.getItem('theme');
+		if (storedTheme) {
+			setTheme(storedTheme);
+		}
+	};
+
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		getThemeFromLocalStorage();
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	const cartTooltip = (
 		<Tooltip id="cartTooltip">
 			Carrinho
 		</Tooltip>
 	);
-
-	useEffect(() => {
-		const getThemeFromLocalStorage = () => {
-			const storedTheme = localStorage.getItem('theme');
-
-			const handleResize = () => {
-				setWindowWidth(window.innerWidth);
-			};
-			window.addEventListener('resize', handleResize);
-
-			if (storedTheme) {
-				setTheme(storedTheme);
-			}
-
-			return () => {
-				window.removeEventListener('resize', handleResize);
-			};
-		};
-
-		getThemeFromLocalStorage();
-	}, []);
 
 	return (
 		<>

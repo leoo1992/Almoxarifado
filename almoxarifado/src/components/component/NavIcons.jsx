@@ -30,18 +30,6 @@ const NavIcons = (props) => {
 		};
 	}, [theme, props]);
 
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(window.innerWidth);
-		};
-
-		window.addEventListener('resize', handleResize);
-
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
-
 	const handlelogout = () => {
 		const cookies = Cookies.get();
 		for (const cookie in cookies) {
@@ -73,13 +61,9 @@ const NavIcons = (props) => {
 		props.updateTheme(newTheme);
 	};
 
-	const logoutTooltip = (
-		<Tooltip id="go-back-tooltip">Logout</Tooltip>
-	);
+	const logoutTooltip = <Tooltip id="go-back-tooltip">Logout</Tooltip>;
 
-	const homeTooltip = (
-		<Tooltip id="go-back-tooltip">Home</Tooltip>
-	);
+	const homeTooltip = <Tooltip id="go-back-tooltip">Home</Tooltip>;
 
 	const toggleThemeTooltip = (
 		<Tooltip id="toggle-theme-tooltip">
