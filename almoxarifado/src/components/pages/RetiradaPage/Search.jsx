@@ -26,12 +26,15 @@ function Search() {
 		}
 	};
 
-	const { setProducts } = useContext(CartContext);
+	const { setProducts, setLoading } = useContext(CartContext);
 	const handleSearch = async (event) => {
 		event.preventDefault();
-
+		setLoading(true);
 		const products = await fetchProducts(search);
 		setProducts(products);
+		setTimeout(() => {
+			setLoading(false);
+		}, 1500);
 		setSearch('');
 	};
 

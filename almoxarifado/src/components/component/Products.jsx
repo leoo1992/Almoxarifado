@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import './styles.css';
 import fetchProducts from '../../api/fetchProducts';
 import ProductCard from './ProductCard';
@@ -8,15 +8,18 @@ import CartContext from '../../context/CartContext';
 
 const Products = () => {
 
-	const {products, setProducts} =useContext(CartContext);
-	const [loading, setloading] = useState(true);
-
+	const {
+		products,
+		setProducts,
+		loading,
+		setLoading
+	} = useContext(CartContext);
 
 	useEffect(() => {
 		fetchProducts().then((response) => {
 			setProducts(response);
 			setTimeout(() => {
-				setloading(false);
+				setLoading(false);
 			}, 1500);
 		});
 
