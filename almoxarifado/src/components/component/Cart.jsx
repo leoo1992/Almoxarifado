@@ -81,7 +81,7 @@ function Cart() {
 					className='p-2 bg-primary text-white fw-bold rounded-top-3 border m-0'
 					closeVariant='white'
 				>
-					<Offcanvas.Title className="fs-6 fw-bold m-0 p-0 font-monospace" >
+					<Offcanvas.Title className="fs-6 fw-bold m-0 p-0" >
 						Carrinho
 					</Offcanvas.Title>
 				</Offcanvas.Header>
