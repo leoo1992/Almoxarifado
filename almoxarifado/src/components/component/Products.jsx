@@ -1,26 +1,33 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './styles.css';
 import fetchProducts from '../../api/fetchProducts';
 import ProductCard from './ProductCard';
+import Loading from './Loading';
+import CartContext from '../../context/CartContext';
 
 const Products = () => {
-	//eslint-disable-next-line
-	const [products, setProducts] = useState([]);
-	//eslint-disable-next-line
+
+	const {products, setProducts} =useContext(CartContext);
+	const [loading, setloading] = useState(true);
+
 
 	useEffect(() => {
 		fetchProducts().then((response) => {
 			setProducts(response);
+			setTimeout(() => {
+				setloading(false);
+			}, 1500);
 		});
 
 	}, []);
 
 	return (
 		<>
-			{
-				products.map((product) => <ProductCard data={product} key={product.id} />)
-			}
+			{loading ? (<Loading />) : (
+				products.map((product) => (
+					<ProductCard data={product} key={product.id} />))
+			)}
 		</>
 	);
 };

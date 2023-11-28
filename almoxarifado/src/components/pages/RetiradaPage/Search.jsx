@@ -1,15 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import './retirar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { MDBRow, MDBCol, MDBInput} from 'mdb-react-ui-kit';
+import { MDBRow, MDBCol, MDBInput } from 'mdb-react-ui-kit';
+import fetchProducts from '../../../api/fetchProducts';
+import CartContext from '../../../context/CartContext';
 
 function Search() {
 	const [isFocused, setIsFocused] = useState(false);
 	const inputRef = useRef(null);
 	const [search, setSearch] = useState('');
 	const [theme, setTheme] = useState(localStorage.getItem('theme'));
-	
+
 	const handleStorageChange = () => {
 
 		const updatedTheme = localStorage.getItem('theme');
@@ -22,6 +24,15 @@ function Search() {
 		if (event.data.theme) {
 			setTheme(event.data.theme);
 		}
+	};
+
+	const { setProducts } = useContext(CartContext);
+	const handleSearch = async (event) => {
+		event.preventDefault();
+
+		const products = await fetchProducts(search);
+		setProducts(products);
+		setSearch('');
 	};
 
 	useEffect(() => {
@@ -53,7 +64,7 @@ function Search() {
 	};
 
 	return (
-		<form>
+		<form onSubmit={handleSearch}>
 			<MDBRow className='d-flex justify-content-end align-content-end align-items-end m-4 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 '>
 				<MDBCol
 					onClick={handleColClick}
@@ -74,7 +85,7 @@ function Search() {
 						onBlur={handleInputBlur}
 						ref={inputRef}
 						value={search}
-						onChange={({target}) => setSearch(target.value)}
+						onChange={({ target }) => setSearch(target.value)}
 						required
 					/>
 				</MDBCol>
