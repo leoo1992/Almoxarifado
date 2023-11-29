@@ -77,3 +77,28 @@
 .tamanho-inputs {
   width: 100px !important;
 }
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #ff0000;
+  animation: arrowAnimation 2s ease-out;
+}
+
+@keyframes arrowAnimation {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-20px);
+  }
+}
