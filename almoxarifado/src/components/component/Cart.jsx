@@ -95,6 +95,8 @@ function Cart() {
 
 
 								<CartItem />
+								<CartItem />
+								<CartItem />
 
 							</MDBRow>
 						</MDBContainer>
