@@ -1,23 +1,27 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
-import { MDBBtn, MDBRow, MDBContainer, MDBBtnGroup } from 'mdb-react-ui-kit';
+import { MDBBtn, MDBRow, MDBContainer, MDBBtnGroup, MDBBadge } from 'mdb-react-ui-kit';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Provider from '../../context/Provider';
 import CartItem from './CartItem';
+import CartContext from '../../context/CartContext';
 
 
 function Cart() {
-	//eslint-disable-next-line
-	const [totalCounters, setTotalCounters] = useState(999);
 	const [showCart, setShowCart] = useState(false);
 	const [theme, setTheme] = useState('dark');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	//eslint-disable-next-line
+	const { cartItems, setCartItems } = useContext(CartContext);
+	const totalCounters = (cartItems.length);
 
 	const handleCloseCart = () => setShowCart(false);
+
+	
 
 	const toggleShowCart = () => {
 		setShowCart((s) => !s);
@@ -93,17 +97,18 @@ function Cart() {
 						<MDBContainer fluid className='m-0 p-0'>
 							<MDBRow className="p-0 m-0 d-flex justify-content-around align-content-around align-items-center row-cols-1 product-tamanho">
 
-
-								<CartItem />
-								<CartItem />
-								<CartItem />
+								{cartItems.map((cartItem) => <CartItem key={cartItem.id} data={cartItem} />)}
 
 							</MDBRow>
 						</MDBContainer>
 					</Offcanvas.Body>
 					<div className="bg-primary p-1 m-0 d-flex justify-content-center align-content-center align-items-center rounded-bottom-3 border">
+						<MDBBadge className='bg-body text-black text-center m-1 d-flex col'>
+							Itens: {cartItems.length}
+						</MDBBadge>
 						<MDBBtnGroup size='sm' className='shadow-5-strong border'>
 							<MDBBtn
+								onClick={() => setCartItems([])}
 								className='m-0 border shadow-5-strong'
 								color='danger'
 							> Limpar</MDBBtn>
