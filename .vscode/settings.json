@@ -1,8 +1,8 @@
 {
     "editor.tabSize": 1,
     "editor.insertSpaces": true,
-    
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true,
-    }
+    },
+    "files.eol": "\r\n"
 }
