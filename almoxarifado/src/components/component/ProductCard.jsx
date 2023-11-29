@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faImage, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import CartContext from '../../context/CartContext';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 import {
 	MDBBtn,
@@ -18,7 +21,36 @@ import {
 
 const ProductCard = ({ data }) => {
 
-	const {title, thumbnail} = data || {};
+	const { title, thumbnail, quantity } = data;
+	const { cartItems, setCartItems } = useContext(CartContext);
+	const [showArrow, setShowArrow] = useState(false);
+
+	const getThemeFromLocalStorage = () => {
+		const storedTheme = localStorage.getItem('theme');
+		if (storedTheme) {
+			return storedTheme;
+		} else {
+			return 'dark';
+		}
+	};
+
+	const handleAddCart = () => {
+		setCartItems([...cartItems, data]);
+		setShowArrow(true);
+		setTimeout(() => {
+			setShowArrow(false);
+		}, 2000);
+		toast.success('Produto adicionado ao carrinho!', {
+			position: 'top-right',
+			autoClose: 2000,
+			hideProgressBar: false,
+			closeOnClick: false,
+			pauseOnHover: false,
+			draggable: true,
+			theme: getThemeFromLocalStorage(),
+			icon: () => <FontAwesomeIcon icon={faCartPlus} className={''} />,
+		});
+	};
 
 	const carrinhoTooltip = (
 		<Tooltip className="custom-tooltip p-0 m-0" id="add-cart">Adicionar ao carrinho</Tooltip>
@@ -31,6 +63,21 @@ const ProductCard = ({ data }) => {
 	);
 	return (
 		<MDBRow className="row-cols m-2 d-flex justify-content-between align-content-between align-items-center img-product pb-5 ">
+			<ToastContainer
+				position="top-right"
+				autoClose={2000}
+				limit={5}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss={false}
+				draggable
+				pauseOnHover={false}
+				theme={getThemeFromLocalStorage()}
+				shadow={false}
+				className='w-auto p-0 m-0 shadow-0 rounded-9'
+			/>
 			<MDBCol className="p-0 m-0">
 				<MDBCard shadow border="success" className="rounded-9 border-3 bg-white shadow-5-strong p-0 m-0" >
 					{thumbnail ? (
@@ -67,6 +114,7 @@ const ProductCard = ({ data }) => {
 								<input
 									type="number"
 									placeholder="Qtd"
+									value={quantity || 0}
 									className=" tamanho-inputs p-1 mb-1 rounded-9 text-center bg-body-secondary 
                                     shadow-5-strong border border-primary border-3 opacity-80"
 								/>
@@ -84,11 +132,13 @@ const ProductCard = ({ data }) => {
 							<OverlayTrigger placement="top" overlay={carrinhoTooltip}>
 								<MDBBtn
 									size="sm"
+									onClick={handleAddCart}
 									className="border border-3 border-success shadow-5-primary 
                                                 fw-bolder p-0 mb-1 rounded-circle w-responsive w-auto
                                                 d-flex justify-content-center align-content-center align-items-center 
                                                 text-center shadow-5-strong opacity-80">
 									<FontAwesomeIcon icon={faCartPlus} className="p-2 m-0 fs-6" />
+									{showArrow && <div className="arrow"></div>}
 								</MDBBtn>
 							</OverlayTrigger>
 						</MDBRow>
