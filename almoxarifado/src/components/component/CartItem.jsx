@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+//eslint-disable-next-line
+import propTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -10,8 +12,23 @@ import {
 	MDBRow,
 	MDBCol,
 } from 'mdb-react-ui-kit';
-import { pregoImage } from '../images';
-function CartItem() {
+
+//eslint-disable-next-line
+function CartItem({ data }) {
+	//eslint-disable-next-line
+	const { title, thumbnail, quantity } = data;
+
+	const [quantidade, setQuantidade] = useState(quantity || 1);
+
+	const addQuantity = () => {
+		setQuantidade(quantidade + 1);
+	};
+
+	const subtractQuantity = () => {
+		if (quantidade > 1) {
+			setQuantidade(quantidade - 1);
+		}
+	};
 
 	return (
 		<MDBCard
@@ -20,8 +37,9 @@ function CartItem() {
 			<MDBRow className='m-0 mt-3 p-0 d-flex justify-content-center align-content-center align-items-center'>
 
 				<MDBCol className='col-4 m-0 p-0 d-flex justify-content-start align-content-center align-items-center'>
-					<MDBCardImage src={pregoImage}
-						alt="img do produto"
+					<MDBCardImage
+						src={thumbnail}
+						alt={title}
 						className="img-product m-0 p-0 d-flex justify-content-center align-content-center align-items-center rounded-9 w-100"
 						fluid
 					/>
@@ -29,7 +47,7 @@ function CartItem() {
 
 				<MDBCol className='col-6 m-0 p-2'>
 					<MDBCardTitle className='m-0 p-0 fs-6 fw-normal font-monospace' >
-						asdsdassdsadaaaaaaaas
+						{title}
 					</MDBCardTitle>
 				</MDBCol>
 
@@ -51,6 +69,7 @@ function CartItem() {
 			<MDBRow className='mb-2 me-2 mt-1 p-0 d-flex justify-content-end align-content-center align-items-center gap-3'>
 				<MDBCol className='col-1 m-0 p-0 text-center d-flex justify-content-center align-content-center align-items-center'>
 					<MDBBtn
+						onClick={subtractQuantity}
 						color='transparent'
 						size="sm"
 						className="p-0 m-0
@@ -60,11 +79,14 @@ function CartItem() {
 				</MDBCol>
 
 				<MDBCol className='col-1 m-0 p-0 text-center d-flex justify-content-center align-content-center align-items-center'>
-					<MDBBadge className='m-0 P-0'>01</MDBBadge>
+					<MDBBadge className='m-0 P-0'>
+						{quantidade}
+					</MDBBadge>
 				</MDBCol>
 
 				<MDBCol className='col-1 m-0 p-0 text-center d-flex justify-content-start align-content-start align-items-start'>
 					<MDBBtn
+						onClick={addQuantity}
 						color='transparent'
 						size="sm"
 						className="p-0 m-0
