@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 //eslint-disable-next-line
 import propTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,14 +12,20 @@ import {
 	MDBRow,
 	MDBCol,
 } from 'mdb-react-ui-kit';
+import CartContext from '../../context/CartContext';
 
 //eslint-disable-next-line
 function CartItem({ data }) {
 	//eslint-disable-next-line
-	const { title, thumbnail, quantity } = data;
-
-	const [quantidade, setQuantidade] = useState(quantity || 1);
-
+	const { title, thumbnail } = data;
+	const { cartItems } = useContext(CartContext);
+	
+	let totalCount = cartItems.reduce((acc, item) => {
+		return acc + item;
+	}, 0);
+	
+	const [quantidade, setQuantidade] = useState( totalCount || 1);
+	
 	const addQuantity = () => {
 		setQuantidade(quantidade + 1);
 	};
@@ -80,7 +86,7 @@ function CartItem({ data }) {
 
 				<MDBCol className='col-1 m-0 p-0 text-center d-flex justify-content-center align-content-center align-items-center'>
 					<MDBBadge className='m-0 P-0'>
-						{quantidade}
+						{quantidade + totalCount}
 					</MDBBadge>
 				</MDBCol>
 

@@ -15,13 +15,10 @@ function Cart() {
 	const [showCart, setShowCart] = useState(false);
 	const [theme, setTheme] = useState('dark');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	//eslint-disable-next-line
 	const { cartItems, setCartItems } = useContext(CartContext);
 	const totalCounters = (cartItems.length);
 
 	const handleCloseCart = () => setShowCart(false);
-
-	
 
 	const toggleShowCart = () => {
 		setShowCart((s) => !s);

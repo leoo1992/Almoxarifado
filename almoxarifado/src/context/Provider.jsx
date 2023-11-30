@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import CartContext from './CartContext';
 
@@ -6,18 +6,19 @@ function Provider({ children }) {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [cartItems, setCartItems] = useState([]);
-
-	const value={
+	
+	const value = {
 		products,
 		setProducts,
 		loading,
 		setLoading,
-		cartItems, 
-		setCartItems
+		cartItems,
+		setCartItems,
 	};
 
+
 	return (
-		<CartContext.Provider value={ value }>
+		<CartContext.Provider value={value}>
 			{children}
 		</CartContext.Provider>
 
@@ -25,7 +26,10 @@ function Provider({ children }) {
 }
 
 export default Provider;
-
 Provider.propTypes = {
 	children: propTypes.any,
-}.isRequired;
+};
+
+Provider.propTypes = {
+	children: propTypes.any.isRequired,
+};
