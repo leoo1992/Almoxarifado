@@ -16,7 +16,6 @@ function Cart() {
 	const [theme, setTheme] = useState('dark');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	const { cartItems, setCartItems } = useContext(CartContext);
-	const totalCounters = (cartItems.length);
 
 	const handleCloseCart = () => setShowCart(false);
 
@@ -62,7 +61,11 @@ function Cart() {
 						size={windowWidth < 370 ? 'sm' : 'lg'}
 						color="none"
 					>
-						<span className="ms-1 m-0 badge rounded-9 text-white fw-bold rounded-circle bg-success">{totalCounters}</span>
+						{cartItems.length > 0 &&
+							< span className="ms-1 m-0 badge rounded-9 text-white fw-bold rounded-circle bg-success">
+								{cartItems.length}
+							</span>
+						}
 						<FontAwesomeIcon icon={faShoppingBasket}
 							className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6 ' : 'fs-3'}`}
 						/>
@@ -101,7 +104,7 @@ function Cart() {
 					</Offcanvas.Body>
 					<div className="bg-primary p-1 m-0 d-flex justify-content-center align-content-center align-items-center rounded-bottom-3 border">
 						<MDBBadge className='bg-body text-black text-center m-1 d-flex col'>
-							Itens: {cartItems.length}
+							Itens: {cartItems.length} | Qtd: { }
 						</MDBBadge>
 						<MDBBtnGroup size='sm' className='shadow-5-strong border'>
 							<MDBBtn
@@ -116,7 +119,7 @@ function Cart() {
 						</MDBBtnGroup>
 					</div>
 				</Offcanvas >
-			</Provider>
+			</Provider >
 		</>
 	);
 }
