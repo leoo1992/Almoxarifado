@@ -16,10 +16,11 @@ import CartContext from '../../context/CartContext';
 import Provider from '../../context/Provider';
 
 //eslint-disable-next-line
-function CartItem({ data }) {
-	let { cartItems, setCartItems } = useContext(CartContext);
+function CartItem({ data, removeItem }) {
+	const { cartItems } = useContext(CartContext);
 	//eslint-disable-next-line
-	const { id, title, thumbnail } = data;
+	const { index, id , title, thumbnail } = data;
+
 
 	let totalCount = cartItems.reduce((acc, item) => {
 		return acc + item;
@@ -37,15 +38,12 @@ function CartItem({ data }) {
 		}
 
 		if (quantidade === 1) {
-			removeItem();
+			removeItemFromCart();
 		}
 	};
 
-	const removeItem = () => {
-
-		const updateCart = cartItems.filter((item) => item.id !== id);
-
-		return setCartItems(updateCart);
+	const removeItemFromCart = () => {
+		removeItem(index);
 	};
 
 	return (
@@ -72,7 +70,7 @@ function CartItem({ data }) {
 
 					<MDBCol className='col-1 m-0 p-0 d-flex justify-content-center align-content-center align-items-center '>
 						<MDBBtn
-							onClick={removeItem}
+							onClick={removeItemFromCart}
 							color='transparent'
 							size="sm"
 							className="p-0 m-0 text-danger shadow-0 text-center">

@@ -24,6 +24,15 @@ function Cart() {
 		getThemeFromLocalStorage();
 	};
 
+	const removeItem = (itemIndex) => {
+		const updatedCart = cartItems.filter((_, index) => index !== itemIndex);
+		setCartItems(updatedCart);
+		const newCart = cartItems.map((cartItem, index) => <CartItem key={index} data={{ ...cartItem, index }} removeItem={removeItem} />);
+
+		return newCart;
+	};
+
+
 	const getThemeFromLocalStorage = () => {
 		const storedTheme = localStorage.getItem('theme');
 		if (storedTheme) {
@@ -97,14 +106,14 @@ function Cart() {
 						<MDBContainer fluid className='m-0 p-0'>
 							<MDBRow className="p-0 m-0 d-flex justify-content-around align-content-around align-items-center row-cols-1 product-tamanho">
 
-								{cartItems.map((cartItem) => <CartItem key={cartItem.id} data={cartItem} />)}
+								{cartItems.map((cartItem, index) => <CartItem key={index} data={{ ...cartItem, index }} removeItem={removeItem} />)} 
 
 							</MDBRow>
 						</MDBContainer>
 					</Offcanvas.Body>
 					<div className="bg-primary p-1 m-0 d-flex justify-content-center align-content-center align-items-center rounded-bottom-3 border">
 						<MDBBadge className='bg-body text-black text-center m-1 d-flex col'>
-							Itens: {cartItems.length} | Qtd: { }
+							Itens: {cartItems.length} | Qtd: {cartItems.length }
 						</MDBBadge>
 						<MDBBtnGroup size='sm' className='shadow-5-strong border'>
 							<MDBBtn

@@ -22,9 +22,14 @@ import Provider from '../../context/Provider';
 
 const ProductCard = ({ data }) => {
 
-	const { title, thumbnail, quantity } = data;
-	const { cartItems, setCartItems } = useContext(CartContext);
+	const { title, thumbnail } = data;
+	const { cartItems, setCartItems, quantity, setQuantity } = useContext(CartContext);
 	const [showArrow, setShowArrow] = useState(false);
+
+	const handleQuantityChange = (event) => {
+		const { value: inputValue } = event.target;
+		setQuantity({ ...quantity, [data.id]: inputValue });
+	};
 
 	const getThemeFromLocalStorage = () => {
 		const storedTheme = localStorage.getItem('theme');
@@ -38,6 +43,7 @@ const ProductCard = ({ data }) => {
 	const handleAddCart = () => {
 		setCartItems([...cartItems, data]);
 		setShowArrow(true);
+		setQuantity({ ...quantity, [data.id]: 0 });
 		setTimeout(() => {
 			setShowArrow(false);
 		}, 500);
@@ -109,7 +115,8 @@ const ProductCard = ({ data }) => {
 										<input
 											type="number"
 											placeholder="Qtd"
-											value={quantity || 0}
+											value={quantity[data.id] || 0}
+											onChange={handleQuantityChange}
 											className=" tamanho-inputs p-1 mb-1 rounded-9 text-center bg-body-secondary 
                                     shadow-5-strong border border-primary border-3 opacity-80"
 										/>
