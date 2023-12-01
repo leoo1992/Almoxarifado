@@ -7,7 +7,7 @@ function Provider({ children }) {
 	const [loading, setLoading] = useState(true);
 	const [cartItems, setCartItems] = useState([]);
 	const [quantity, setQuantity] = useState([]);
-
+	
 	const value = {
 		products,
 		setProducts,

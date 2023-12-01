@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useContext } from 'react';
 import './styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingBasket, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { MDBBtn, MDBRow, MDBContainer, MDBBtnGroup, MDBBadge } from 'mdb-react-ui-kit';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -9,13 +9,14 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Provider from '../../context/Provider';
 import CartItem from './CartItem';
 import CartContext from '../../context/CartContext';
-
+import { toast } from 'react-toastify';
 
 function Cart() {
 	const [showCart, setShowCart] = useState(false);
 	const [theme, setTheme] = useState('dark');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const { cartItems, setCartItems } = useContext(CartContext);
+	const { cartItems, setCartItems, quantity } = useContext(CartContext);
+	const [totalQuantity, setTotalQuantity] = useState(0);
 
 	const handleCloseCart = () => setShowCart(false);
 
@@ -33,6 +34,7 @@ function Cart() {
 	};
 
 
+
 	const getThemeFromLocalStorage = () => {
 		const storedTheme = localStorage.getItem('theme');
 		if (storedTheme) {
@@ -44,14 +46,66 @@ function Cart() {
 		setWindowWidth(window.innerWidth);
 	};
 
+	const clearCart = () => {
+
+		if (totalQuantity !== 0 || cartItems.length !== 0) {
+			setCartItems([]);
+			setTotalQuantity(0);
+			toast.success('Carrinho esvaziado', {
+				icon: customIcon,
+				className: 'bg-success text-light fs-4',
+				style: {
+					background: 'transparent',
+				}
+			});
+		} else {
+			toast.error('Carrinho vazio', {
+				icon: '❌',
+				className: 'bg-danger text-light fs-6',
+				style: {
+					background: 'transparent',
+				},
+			});
+		}
+	};
+
+	const customIcon = <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />;
+	const endCart = () => {
+
+		if (totalQuantity !== 0 || cartItems.length !== 0) {
+			setCartItems([]);
+			setTotalQuantity(0);
+			setShowCart((s) => !s);
+			toast.success('Compra Realizada', {
+				icon: customIcon,
+				className: 'bg-success text-light fs-4',
+				style: {
+					background: 'transparent',
+				},
+				position: toast.POSITION.TOP_CENTER,
+			});
+		} else {
+			toast.error('Carrinho vazio', {
+				icon: '❌',
+				className: 'bg-danger text-light fs-6',
+				style: {
+					background: 'transparent',
+				},
+			});
+		}
+
+	};
+
 	useEffect(() => {
 		getThemeFromLocalStorage();
 		window.addEventListener('resize', handleResize);
 
+		setTotalQuantity(Object.values(quantity).reduce((acc, value) => acc + parseInt(value, 10), 0));
+
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
-	}, []);
+	}, [quantity]);
 
 	const cartTooltip = (
 		<Tooltip id="cartTooltip">
@@ -106,22 +160,23 @@ function Cart() {
 						<MDBContainer fluid className='m-0 p-0'>
 							<MDBRow className="p-0 m-0 d-flex justify-content-around align-content-around align-items-center row-cols-1 product-tamanho">
 
-								{cartItems.map((cartItem, index) => <CartItem key={index} data={{ ...cartItem, index }} removeItem={removeItem} />)} 
+								{cartItems.map((cartItem, index) => <CartItem key={index} data={{ ...cartItem, index }} removeItem={removeItem} />)}
 
 							</MDBRow>
 						</MDBContainer>
 					</Offcanvas.Body>
 					<div className="bg-primary p-1 m-0 d-flex justify-content-center align-content-center align-items-center rounded-bottom-3 border">
 						<MDBBadge className='bg-body text-black text-center m-1 d-flex col'>
-							Itens: {cartItems.length} | Qtd: {cartItems.length }
+							Itens: {cartItems.length} | Qtd: {totalQuantity}
 						</MDBBadge>
 						<MDBBtnGroup size='sm' className='shadow-5-strong border'>
 							<MDBBtn
-								onClick={() => setCartItems([])}
+								onClick={clearCart}
 								className='m-0 border shadow-5-strong'
 								color='danger'
 							> Limpar</MDBBtn>
 							<MDBBtn
+								onClick={endCart}
 								className='m-0 border shadow-5-strong'
 								color='success'
 							>Finalizar</MDBBtn>

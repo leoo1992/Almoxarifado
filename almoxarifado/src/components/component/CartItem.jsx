@@ -17,7 +17,7 @@ import Provider from '../../context/Provider';
 
 //eslint-disable-next-line
 function CartItem({ data, removeItem }) {
-	const { cartItems } = useContext(CartContext);
+	const { cartItems, quantity, setQuantity } = useContext(CartContext);
 	//eslint-disable-next-line
 	const { index, id , title, thumbnail } = data;
 
@@ -30,11 +30,15 @@ function CartItem({ data, removeItem }) {
 
 	const addQuantity = () => {
 		setQuantidade(quantidade + 1);
+		setQuantity(quantity + 1);
+		
 	};
 
 	const subtractQuantity = () => {
 		if (quantidade > 1) {
 			setQuantidade(quantidade - 1);
+			setQuantity(quantity - 1);
+			
 		}
 
 		if (quantidade === 1) {
@@ -98,7 +102,7 @@ function CartItem({ data, removeItem }) {
 
 					<MDBCol className='col-1 m-0 p-0 text-center d-flex justify-content-center align-content-center align-items-center'>
 						<MDBBadge className='m-0 P-0'>
-							{quantidade + totalCount}
+							{quantidade + totalCount + quantity}
 						</MDBBadge>
 					</MDBCol>
 

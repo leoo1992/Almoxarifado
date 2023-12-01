@@ -22,13 +22,14 @@ import Provider from '../../context/Provider';
 
 const ProductCard = ({ data }) => {
 
-	const { title, thumbnail } = data;
+	const { id, title, thumbnail } = data;
 	const { cartItems, setCartItems, quantity, setQuantity } = useContext(CartContext);
 	const [showArrow, setShowArrow] = useState(false);
+	const [quantityToAdd, setQuantityToAdd] = useState(0);
 
 	const handleQuantityChange = (event) => {
 		const { value: inputValue } = event.target;
-		setQuantity({ ...quantity, [data.id]: inputValue });
+		setQuantityToAdd(inputValue);
 	};
 
 	const getThemeFromLocalStorage = () => {
@@ -41,13 +42,19 @@ const ProductCard = ({ data }) => {
 	};
 
 	const handleAddCart = () => {
-		setCartItems([...cartItems, data]);
-		setShowArrow(true);
-		setQuantity({ ...quantity, [data.id]: 0 });
-		setTimeout(() => {
-			setShowArrow(false);
-		}, 500);
-		toast.success('Adicionado ao carrinho');
+		if (!isNaN(quantityToAdd) && quantityToAdd > 0) {
+			setCartItems([...cartItems, { ...data, quantity }]);
+			setShowArrow(true);
+			setTimeout(() => {
+				setShowArrow(false);
+				setQuantity(quantityToAdd);
+				setQuantityToAdd(0);
+				document.getElementById(`quantity-input-${id}`).value = 1;
+			}, 500);
+			toast.success('Adicionado ao carrinho');
+		} else {
+			toast.error('Insira uma quantidade', { icon: '❌' });
+		}
 	};
 
 	const carrinhoTooltip = (
@@ -115,7 +122,11 @@ const ProductCard = ({ data }) => {
 										<input
 											type="number"
 											placeholder="Qtd"
-											value={quantity[data.id] || 0}
+											min="1"
+											max="999"
+											step="1"
+											id={`quantity-input-${id}`}
+											value={quantityToAdd}
 											onChange={handleQuantityChange}
 											className=" tamanho-inputs p-1 mb-1 rounded-9 text-center bg-body-secondary 
                                     shadow-5-strong border border-primary border-3 opacity-80"
