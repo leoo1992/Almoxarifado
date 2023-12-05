@@ -10,8 +10,7 @@ function Provider({ children }) {
 	const [loading, setLoading] = useState(true);
 	const [cartItems, setCartItems] = useState([]);
 	const [quantity, setQuantity] = useState([]);
-	const [totalQuantity, setTotalQuantity] = useState(quantity || 1);
-
+	const [totalQuantity, setTotalQuantity] = useState();
 
 	const customIcon = <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />;
 
@@ -46,7 +45,6 @@ function Provider({ children }) {
 			});
 		}
 	};
-
 
 	const value = {
 		products,

@@ -17,6 +17,7 @@ import {
 	MDBCardOverlay,
 	MDBRow,
 	MDBCol,
+	MDBInput
 } from 'mdb-react-ui-kit';
 import Provider from '../../context/Provider';
 
@@ -28,8 +29,10 @@ const ProductCard = ({ data }) => {
 	const [quantityToAdd, setQuantityToAdd] = useState(0);
 
 	const handleQuantityChange = (event) => {
-		const { value: inputValue } = event.target;
-		setQuantityToAdd(inputValue);
+		let inputValue = parseInt(event.target.value, 10);
+		let newQuantity = Math.min(Math.max(inputValue, 0), 999);
+		setQuantityToAdd(newQuantity);
+		setQuantity(id, newQuantity);
 	};
 
 	const getThemeFromLocalStorage = () => {
@@ -119,17 +122,15 @@ const ProductCard = ({ data }) => {
 								<MDBRow className="p-0 m-0 p-0 m-0 d-flex justify-content-end 
                                         align-content-end align-items-end text-end">
 									<OverlayTrigger placement="top" overlay={qtdTooltip}>
-										<input
+										<MDBInput
 											type="number"
-											placeholder="Qtd"
-											min="1"
-											max="999"
-											step="1"
-											id={`quantity-input-${id}`}
+											id='floatingInput'
+											size='sm'
 											value={quantityToAdd}
+											min={1}
+											max={999}
 											onChange={handleQuantityChange}
-											className=" tamanho-inputs p-1 mb-1 rounded-9 text-center bg-body-secondary 
-                                    shadow-5-strong border border-primary border-3 opacity-80"
+											className="fw-bold text-center bg-body text-black fs-6 w-50"
 										/>
 									</OverlayTrigger>
 									<OverlayTrigger placement="top" overlay={infoTooltip}>
