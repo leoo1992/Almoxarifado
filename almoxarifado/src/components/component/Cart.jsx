@@ -15,8 +15,7 @@ function Cart() {
 	const [showCart, setShowCart] = useState(false);
 	const [theme, setTheme] = useState('dark');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const { cartItems, setCartItems, quantity } = useContext(CartContext);
-	const [totalQuantity, setTotalQuantity] = useState(0);
+	const { cartItems, setCartItems, quantity, totalQuantity, setTotalQuantity, clearCart } = useContext(CartContext);
 
 	const handleCloseCart = () => setShowCart(false);
 
@@ -33,8 +32,6 @@ function Cart() {
 		return newCart;
 	};
 
-
-
 	const getThemeFromLocalStorage = () => {
 		const storedTheme = localStorage.getItem('theme');
 		if (storedTheme) {
@@ -46,30 +43,8 @@ function Cart() {
 		setWindowWidth(window.innerWidth);
 	};
 
-	const clearCart = () => {
-
-		if (totalQuantity !== 0 || cartItems.length !== 0) {
-			setCartItems([]);
-			setTotalQuantity(0);
-			toast.success('Carrinho esvaziado', {
-				icon: customIcon,
-				className: 'bg-success text-light fs-4',
-				style: {
-					background: 'transparent',
-				}
-			});
-		} else {
-			toast.error('Carrinho vazio', {
-				icon: '❌',
-				className: 'bg-danger text-light fs-6',
-				style: {
-					background: 'transparent',
-				},
-			});
-		}
-	};
-
 	const customIcon = <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />;
+	
 	const endCart = () => {
 
 		if (totalQuantity !== 0 || cartItems.length !== 0) {

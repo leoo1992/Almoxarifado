@@ -17,9 +17,10 @@ import Provider from '../../context/Provider';
 
 //eslint-disable-next-line
 function CartItem({ data, removeItem }) {
-	const { cartItems, quantity, setQuantity } = useContext(CartContext);
 	//eslint-disable-next-line
-	const { index, id , title, thumbnail } = data;
+	const { cartItems, quantity, setQuantity, totalQuantity, setTotalQuantity } = useContext(CartContext);
+	//eslint-disable-next-line
+	const { index, id, title, thumbnail } = data;
 
 
 	let totalCount = cartItems.reduce((acc, item) => {
@@ -30,18 +31,22 @@ function CartItem({ data, removeItem }) {
 
 	const addQuantity = () => {
 		setQuantidade(quantidade + 1);
-		setQuantity(quantity + 1);
-		
+		setTotalQuantity(quantidade);
+		setQuantity(quantidade);
+
 	};
 
 	const subtractQuantity = () => {
 		if (quantidade > 1) {
 			setQuantidade(quantidade - 1);
-			setQuantity(quantity - 1);
-			
+			setTotalQuantity(quantidade);
+			setQuantity(quantidade);
 		}
 
 		if (quantidade === 1) {
+			setQuantidade(0);
+			setTotalQuantity(0);
+			setQuantity(0);
 			removeItemFromCart();
 		}
 	};
@@ -102,7 +107,7 @@ function CartItem({ data, removeItem }) {
 
 					<MDBCol className='col-1 m-0 p-0 text-center d-flex justify-content-center align-content-center align-items-center'>
 						<MDBBadge className='m-0 P-0'>
-							{quantidade + totalCount + quantity}
+							{totalQuantity}
 						</MDBBadge>
 					</MDBCol>
 
