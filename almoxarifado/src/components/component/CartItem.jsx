@@ -107,7 +107,7 @@ function CartItem({ data, removeItem }) {
 
 					<MDBCol className='col-1 m-0 p-0 text-center d-flex justify-content-center align-content-center align-items-center'>
 						<MDBBadge className='m-0 P-0'>
-							{totalQuantity}
+							{quantidade}
 						</MDBBadge>
 					</MDBCol>
 
