@@ -1,5 +1,5 @@
 <div style="display: flex; align-items: center; justify-content: center;">
-  <img src="https://cdn-icons-gif.flaticon.com/10690/10690695.gif" alt="page" width="100" height="100" autoplay>
+  <img src="https://cdn-icons-gif.flaticon.com/10690/10690695.gif" alt="page" width="100" height="100" autoplay style="display: flex; align-items: center; justify-content: center;">
 </div>
 
 
