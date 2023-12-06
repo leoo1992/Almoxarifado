@@ -1,5 +1,6 @@
-
-<img src="https://cdn-icons-gif.flaticon.com/10690/10690695.gif" alt="page" width="100" height="100">
+<div style="display: flex; align-items: center; justify-content: center;">
+  <img src="https://cdn-icons-gif.flaticon.com/10690/10690695.gif" alt="page" width="100" height="100" autoplay>
+</div>
 
 
 # **Description**
@@ -54,7 +55,7 @@ npm start
 
 **5- Wait to initialize back-end and start the front with:**
 ```sh
-cd .\almoxarifado\
+cd .\front-end\
 npm start
 ```
 
