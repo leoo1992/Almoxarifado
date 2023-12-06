@@ -1,15 +1,14 @@
-<div style="display: flex; align-items: center; justify-content: center;">
-  <img src="https://cdn-icons-gif.flaticon.com/10690/10690695.gif" alt="page" width="100" height="100" autoplay style="display: flex; align-items: center; justify-content: center;">
-</div>
 
+# Welcome to my project 
+A web application crafted using an array of technologies and tools. This repository serves as a comprehensive resource, housing both the source code and documentation essential for gaining insight into the intricacies of the project.
 
-# **Description**
+# **Project Overview**
 
-web application that uses various technologies and tools to offer a modern and efficient experience. This repository contains the source code and documentation needed to understand the project.
+The application revolves around managing a product inventory, featuring a streamlined cart for quick pickups. It integrates with the Mercado Livre BR API
 
 ___
 
-# **Technologies used**
+# **Key Technologies Utilized**
 The table below highlights the main technologies used in the project, both on the front-end and back-end.
 
 | **Front** | **Back**|
@@ -33,7 +32,7 @@ ___
 ```sh
 git clone https://github.com/leoo1992/Almoxarifado.git
 ```
-**2- Access and Install dependencies in front and back using:** 
+**2- Access and Install Dependencies in Front-end and Back-end using::** 
 ```sh
 npm install.
 ```
@@ -53,7 +52,7 @@ cd .\back-end\
 npm start
 ```
 
-**5- Wait to initialize back-end and start the front with:**
+**5- Wait for the back-end to initialize, then start the front-end with:**
 ```sh
 cd .\front-end\
 npm start
