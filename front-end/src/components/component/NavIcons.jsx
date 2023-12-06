@@ -72,65 +72,67 @@ const NavIcons = (props) => {
 	);
 
 	return (
-		<div className="d-flex flex-wrap m-0 p-0 align-items-center gap-1 justify-content-center  align-content-center">
+		<>
+			<div className="d-flex flex-wrap m-0 p-0 align-items-center gap-1 justify-content-center  align-content-center">
 
-			{!props.disableCart ? (
-				<Cart />
-			) : (
-				<div className="d-none p-0 m-0"></div>
-			)}
+				{!props.disableCart ? (
+					<Cart />
+				) : (
+					<div className="d-none p-0 m-0"></div>
+				)}
 
-			<OverlayTrigger placement="bottom" overlay={toggleThemeTooltip}>
-				<MDBBtn
-					onClick={handleToggleTheme}
-					floating
-					className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center border"
-					color="none"
-					size= {windowWidth < 370 ? 'sm' : 'lg'}
-					id="trocaTema"
-				>
-					{theme === 'dark' ? (
-						<FontAwesomeIcon icon={faSun}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-warning m-0 rounded-circle 
+				<OverlayTrigger placement="bottom" overlay={toggleThemeTooltip}>
+					<MDBBtn
+						onClick={handleToggleTheme}
+						floating
+						className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center border"
+						color="none"
+						size={windowWidth < 370 ? 'sm' : 'lg'}
+						id="trocaTema"
+					>
+						{theme === 'dark' ? (
+							<FontAwesomeIcon icon={faSun} className={`d-flex justify-content-center align-content-center align-items-center text-black bg-warning m-0 rounded-circle 
 						${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} ${windowWidth < 340 ? 'fs-6 p-1 w-25 h-25' : ''}`} />
-					) : (
-						<FontAwesomeIcon icon={faMoon}  className={`d-flex justify-content-center align-content-center align-items-center text-black bg-info m-0 rounded-circle 
+						) : (
+							<FontAwesomeIcon icon={faMoon} className={`d-flex justify-content-center align-content-center align-items-center text-black bg-info m-0 rounded-circle 
 						${windowWidth < 370 ? 'fs-6 p-2 w-50 h-50' : 'fs-3 p-3 w-75 h-75'} ${windowWidth < 340 ? 'fs-6 p-1 w-25 h-25' : ''}`} />
-					)}
-				</MDBBtn>
-			</OverlayTrigger>
-
-			{!props.disableHome ? (
-				<OverlayTrigger placement="bottom" overlay={homeTooltip}>
-					<Link to="/">
-						<MDBBtn
-							className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border"
-							size= {windowWidth < 370 ? 'sm' : 'lg'}
-							color="primary"
-						>
-							<FontAwesomeIcon icon={faHome}
-								className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'} ${windowWidth < 340 ? 'fs-6 p-1' : ''} `} 
-							/>
-						</MDBBtn>
-					</Link>
+						)}
+					</MDBBtn>
 				</OverlayTrigger>
-			) : (
-				<div className="d-none p-0 m-0"></div>
-			)}
 
-			<OverlayTrigger placement="bottom" overlay={logoutTooltip}>
-				<MDBBtn
-					onClick={handlelogout}
-					className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border"
-					size= {windowWidth < 370 ? 'sm' : 'lg'}
-					color="primary"
-				>
-					<FontAwesomeIcon icon={faSignOutAlt}
-						className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'}  ${windowWidth < 340 ? 'fs-6 p-1' : ''}`}  
-					/>
-				</MDBBtn>
-			</OverlayTrigger>
-			< Menu />
-		</div>
+				{!props.disableHome ? (
+					<OverlayTrigger placement="bottom" overlay={homeTooltip}>
+						<Link to="/">
+							<MDBBtn
+								className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border"
+								size={windowWidth < 370 ? 'sm' : 'lg'}
+								color="primary"
+							>
+								<FontAwesomeIcon icon={faHome}
+									className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'} ${windowWidth < 340 ? 'fs-6 p-1' : ''} `}
+								/>
+							</MDBBtn>
+						</Link>
+					</OverlayTrigger>
+				) : (
+					<div className="d-none p-0 m-0"></div>
+				)}
+
+				<OverlayTrigger placement="bottom" overlay={logoutTooltip}>
+					<MDBBtn
+						onClick={handlelogout}
+						className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-circle border"
+						size={windowWidth < 370 ? 'sm' : 'lg'}
+						color="primary"
+					>
+						<FontAwesomeIcon icon={faSignOutAlt}
+							className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6' : 'fs-3'}  ${windowWidth < 340 ? 'fs-6 p-1' : ''}`}
+						/>
+					</MDBBtn>
+				</OverlayTrigger>
+			</div>
+			< Menu className="p-0 m-0 z-3 top-0 rigth-0  position-fixed d-flex" />
+		</>
 	);
 };
 

@@ -46,7 +46,7 @@ const HomePage = () => {
 	return (
 		<>
 			<NavPrincipal updateTheme={updateTheme} disableCart={true} disableHome={true} className="w-100 vw-100 d-flex" />
-			<MDBContainer fluid className={`m-0 p-0 vh-100 min-vh-100 ${theme === 'dark' ? 'bg-dark data-bs-theme-dark' : 'bg-light data-bs-theme-light'}`}>
+			<MDBContainer fluid className={`m-0 p-0 pt-5 vh-100 min-vh-100 ${theme === 'dark' ? 'bg-dark data-bs-theme-dark' : 'bg-light data-bs-theme-light'}`}>
 
 				<MDBRow className="p-2 m-2 d-flex justify-content-start align-content-center align-items-center row-cols-2 row-cols-sm-4 row-cols-md-6 row-cols-lg-8 row-cols-xl-10 g-5">
 					<MDBCol className="d-flex justify-content-center align-content-center align-items-center">

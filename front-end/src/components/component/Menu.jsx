@@ -4,6 +4,8 @@ import { OverlayTrigger, Tooltip, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCubes, faShareFromSquare, faBoxesStacked, faPlugCircleExclamation, faTableCells } from '@fortawesome/free-solid-svg-icons';
 import { MDBBtn } from 'mdb-react-ui-kit';
+import UseAnimations from 'react-useanimations';
+import MenuIcon from 'react-useanimations/lib/menu4';
 
 const Menu = () => {
 	const [show, setShow] = useState(false);
@@ -12,8 +14,10 @@ const Menu = () => {
 
 	const handleClose = () => setShow(false);
 	const toggleShow = () => {
-		setShow((s) => !s);
 		getThemeFromLocalStorage();
+		setTimeout(() => {
+			setShow((s) => !s);
+		}, 800);
 	};
 
 	const getThemeFromLocalStorage = () => {
@@ -36,20 +40,20 @@ const Menu = () => {
 
 	const menuTooltip = (
 		<Tooltip id="menu-tooltip">
-      Menu
+			Menu
 		</Tooltip>
 	);
 
 	return (
-		<>
+		<div className="position-relative ">
 			<OverlayTrigger placement="bottom" overlay={menuTooltip}>
 				<MDBBtn
 					variant="primary"
 					onClick={toggleShow}
-					size= {windowWidth < 370 ? 'sm' : 'lg'}
+					size={windowWidth < 370 ? 'sm' : 'lg'}
 					className="m-0 p-0 shadow d-flex justify-content-center align-content-center align-items-center fw-bold rounded-5 border"
 				>
-					<FontAwesomeIcon icon={faBars} className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6 ' : 'fs-3'}`}  />
+					<FontAwesomeIcon icon={faBars} className={`text-white m-0 p-2 ${windowWidth < 370 ? 'fs-6 ' : 'fs-3'}`} />
 				</MDBBtn >
 			</OverlayTrigger>
 			<Offcanvas
@@ -65,12 +69,20 @@ const Menu = () => {
 				className={`m-1 hover-menu menu-tamanho w-auto shadow-6-strong d-flex ${theme === 'dark' ? 'bg-dark data-bs-theme-dark text-white border border-white' : 'bg-light data-bs-theme-light text-black border border-dark'}`}
 			>
 				<Offcanvas.Header
-					closeButton
 					closeVariant={`${theme === 'dark' ? 'white' : ''}`}
 				>
 					<Offcanvas.Title className="fs-4 fw-bold" >
-            Menu
+						Menu
 					</Offcanvas.Title>
+
+					<MDBBtn
+						onClick={!show ? toggleShow : handleClose}
+						className={`p-0 m-0 btn-danger shadow-5-strong border border-2 ${theme === 'dark'  ? 'border-white' : 'border-dark'}`}
+					>
+						<UseAnimations animation={MenuIcon} reverse speed={0.5} size={windowWidth < 370 ? 30 : 30} strokeColor={'white'}
+							className={'m-0 p-0 d-flex fw-bold justify-content-center align-content-center align-items-center cursor-pointer'} />
+					</MDBBtn>
+
 				</Offcanvas.Header>
 
 				<Offcanvas.Body className='d-flex justify-content-center'>
@@ -168,7 +180,7 @@ const Menu = () => {
 					</ul>
 				</Offcanvas.Body>
 			</Offcanvas>
-		</>
+		</div>
 	);
 };
 

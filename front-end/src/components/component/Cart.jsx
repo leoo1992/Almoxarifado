@@ -10,6 +10,8 @@ import Provider from '../../context/Provider';
 import CartItem from './CartItem';
 import CartContext from '../../context/CartContext';
 import { toast } from 'react-toastify';
+import UseAnimations from 'react-useanimations';
+import MenuIcon from 'react-useanimations/lib/menu4';
 
 function Cart() {
 	const [showCart, setShowCart] = useState(false);
@@ -20,8 +22,10 @@ function Cart() {
 	const handleCloseCart = () => setShowCart(false);
 
 	const toggleShowCart = () => {
-		setShowCart((s) => !s);
 		getThemeFromLocalStorage();
+		setTimeout(() => {
+			setShowCart((s) => !s);
+		}, 800);
 	};
 
 	const removeItem = (itemIndex) => {
@@ -44,7 +48,7 @@ function Cart() {
 	};
 
 	const customIcon = <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />;
-	
+
 	const endCart = () => {
 
 		if (totalQuantity !== 0 || cartItems.length !== 0) {
@@ -122,13 +126,21 @@ function Cart() {
 					className={`m-0 rounded-3 hover-menu menu-tamanho w-auto shadow-6-strong ${theme === 'dark' ? 'bg-dark data-bs-theme-dark text-white border border-white' : 'bg-light data-bs-theme-light text-black border border-dark'}`}
 				>
 					<Offcanvas.Header
-						closeButton
 						className='p-2 bg-primary text-white fw-bold rounded-top-3 border m-0'
 						closeVariant='white'
 					>
 						<Offcanvas.Title className="fs-6 fw-bold m-0 p-0" >
 							Carrinho
 						</Offcanvas.Title>
+
+						<MDBBtn
+							onClick={!showCart ? toggleShowCart : handleCloseCart}
+							className={`p-0 m-0 btn-danger shadow-5-strong border border-2 ${theme === 'dark' ? 'border-white' : 'border-dark'}`}
+						>
+							<UseAnimations animation={MenuIcon} reverse speed={0.5} size={windowWidth < 370 ? 30 : 30} strokeColor={'white'}
+								className={'m-0 p-0 d-flex fw-bold justify-content-center align-content-center align-items-center cursor-pointer'} />
+						</MDBBtn>
+
 					</Offcanvas.Header>
 
 					<Offcanvas.Body className='d-flex justify-content-center'>
