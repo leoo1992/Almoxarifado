@@ -78,11 +78,13 @@ function Search() {
 					<FontAwesomeIcon icon={faSearch} className='m-0 p-0 text-white' />
 					<MDBInput
 						type="search"
+						color=''
+						variant=''
 						size='sm'
+						style={{ background: 'transparent', backgroundColor: 'transparent'}}
 						id='searchfield'
-						label='Procurar'
 						placeholder='Procurar'
-						className='rounded-9'
+						className='bg-transparent text-bg-transparent'
 						contrast
 						onFocus={handleInputFocus}
 						onBlur={handleInputBlur}
