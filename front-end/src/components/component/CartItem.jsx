@@ -18,45 +18,47 @@ import Provider from '../../context/Provider';
 //eslint-disable-next-line
 function CartItem({ data, removeItem }) {
 	//eslint-disable-next-line
-	const { cartItems, setQuantity, totalQuantity, setTotalQuantity } = useContext(CartContext);
+	const { cartItems, setQuantity, setTotalQuantity, myCart, removeMycart , removerItemCart, quantity } = useContext(CartContext);
 	//eslint-disable-next-line
 	const { index, id, title, thumbnail } = data;
 
 	const [quantidade, setQuantidade] = useState(1);
 
+
 	useEffect(() => {
-		setTotalQuantity(
-			Object.values(cartItems).reduce((acc, value) => acc + parseInt(value, 10), 0)
-		);
-	}, [cartItems]);
+		const itemQuantity = myCart[index]?.quantidade || 1;
+		setQuantidade(itemQuantity);
+	}, [myCart, index, setTotalQuantity, cartItems]);
 
 	const handleQuantidadeChange = (event) => {
-		let inputValue = parseInt(event.target.value, 10);
-		let newQuantity = Math.min(Math.max(inputValue, 1), 999);
+		const inputValue = parseInt(event.target.value, 10);
+		const newQuantity = Math.min(Math.max(inputValue, 1), 999);
 		setQuantidade(newQuantity);
 		setTotalQuantity(newQuantity);
-		setQuantity(id, newQuantity);
+		setQuantity(parseInt(quantity) + parseInt(newQuantity));
 	};
 
 	const removeItemFromCart = () => {
 		removeItem(index);
+		removerItemCart(index);
 	};
 
 	const addQuantity = () => {
 		const newQuantity = Math.min(quantidade + 1, 999);
 		setQuantidade(newQuantity);
 		setTotalQuantity(newQuantity);
-		setQuantity(id, newQuantity);
+		setQuantity(parseInt(quantity) + parseInt(newQuantity));
 	};
 
 	const subtractQuantity = () => {
 		const newQuantity = Math.max(quantidade - 1, 1);
 		setQuantidade(newQuantity);
 		setTotalQuantity(newQuantity);
-		setQuantity(id, newQuantity);
+		setQuantity(parseInt(quantity) - parseInt(newQuantity));
 
 		if (newQuantity === 1) {
 			removeItemFromCart();
+			removeMycart();
 		}
 	};
 
@@ -109,7 +111,6 @@ function CartItem({ data, removeItem }) {
 							min={1}
 							max={999}
 							onChange={handleQuantidadeChange}
-							rounded
 							className="fw-bold text-end bg-body text-black shadow-5 border-black fs-6 p-1 m-0 rounded-5 shadow-2-strong"
 						/>
 					</MDBCol>

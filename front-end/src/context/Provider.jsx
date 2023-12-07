@@ -9,8 +9,28 @@ function Provider({ children }) {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [cartItems, setCartItems] = useState([]);
-	const [quantity, setQuantity] = useState([]);
+	const [quantity, setQuantity] = useState(0);
 	const [totalQuantity, setTotalQuantity] = useState();
+	const [myCart, setMyCart] = useState([]);
+
+	const adicionarItem = (item) => {
+		setMyCart([...myCart, item]);
+		console.log(item);
+		console.log(myCart);
+
+	};
+
+	const removerItemCart = (index) => {
+		const novoArray = [...myCart];
+		novoArray.splice(index, 1);
+		setMyCart(novoArray);
+	};
+
+	const removeMycart = () => {
+		setMyCart([]);
+	};
+
+
 
 	const customIcon = <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />;
 
@@ -24,7 +44,8 @@ function Provider({ children }) {
 		if (totalQuantity !== 0 || cartItems.length !== 0) {
 			setCartItems([]);
 			setTotalQuantity(0);
-			setQuantity(0);
+			setQuantity([]);
+			removeMycart();
 			toast.success('Carrinho esvaziado', {
 				icon: customIcon,
 				className: 'bg-success text-light fs-4',
@@ -57,7 +78,12 @@ function Provider({ children }) {
 		setQuantity,
 		totalQuantity,
 		setTotalQuantity,
-		clearCart
+		clearCart,
+		myCart,
+		setMyCart,
+		adicionarItem,
+		removerItemCart,
+		removeMycart
 	};
 
 

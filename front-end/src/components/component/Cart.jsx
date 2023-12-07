@@ -17,7 +17,7 @@ function Cart() {
 	const [showCart, setShowCart] = useState(false);
 	const [theme, setTheme] = useState('dark');
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const { cartItems, setCartItems, quantity, totalQuantity, setTotalQuantity, clearCart } = useContext(CartContext);
+	const { cartItems, setCartItems, quantity, totalQuantity, setTotalQuantity, clearCart, removeMycart, removerItemCart } = useContext(CartContext);
 
 	const handleCloseCart = () => setShowCart(false);
 
@@ -31,8 +31,8 @@ function Cart() {
 	const removeItem = (itemIndex) => {
 		const updatedCart = cartItems.filter((_, index) => index !== itemIndex);
 		setCartItems(updatedCart);
+		removerItemCart(itemIndex);
 		const newCart = cartItems.map((cartItem, index) => <CartItem key={index} data={{ ...cartItem, index }} removeItem={removeItem} />);
-
 		return newCart;
 	};
 
@@ -55,6 +55,7 @@ function Cart() {
 			setCartItems([]);
 			setTotalQuantity(0);
 			setShowCart((s) => !s);
+			removeMycart();
 			toast.success('Compra Realizada', {
 				icon: customIcon,
 				className: 'bg-success text-light fs-4',
@@ -79,12 +80,12 @@ function Cart() {
 		getThemeFromLocalStorage();
 		window.addEventListener('resize', handleResize);
 
-		setTotalQuantity(Object.values(quantity).reduce((acc, value) => acc + parseInt(value, 10), 0));
+		setTotalQuantity(Object.values(parseInt(quantity)).reduce((acc, value) => acc + parseInt(value, 10), 0));
 
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
-	}, [quantity]);
+	}, [parseInt(quantity)]);
 
 	const cartTooltip = (
 		<Tooltip id="cartTooltip">
@@ -154,7 +155,7 @@ function Cart() {
 					</Offcanvas.Body>
 					<div className="bg-primary p-1 m-0 d-flex justify-content-center align-content-center align-items-center rounded-bottom-3 border">
 						<MDBBadge className='bg-body text-black text-center m-1 d-flex col'>
-							Itens: {cartItems.length} | Qtd: {totalQuantity}
+							Itens: {cartItems.length} | Qtd: {parseInt(quantity)}
 						</MDBBadge>
 						<MDBBtnGroup size='sm' className='shadow-5-strong border'>
 							<MDBBtn

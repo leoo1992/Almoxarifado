@@ -24,15 +24,14 @@ import Provider from '../../context/Provider';
 const ProductCard = ({ data }) => {
 
 	const { id, title, thumbnail } = data;
-	const { cartItems, setCartItems, quantity, setQuantity } = useContext(CartContext);
+	const { cartItems, setCartItems, quantity, setQuantity, adicionarItem } = useContext(CartContext);
 	const [showArrow, setShowArrow] = useState(false);
 	const [quantityToAdd, setQuantityToAdd] = useState(0);
 
 	const handleQuantityChange = (event) => {
 		let inputValue = parseInt(event.target.value, 10);
 		let newQuantity = Math.min(Math.max(inputValue, 1), 999);
-		setQuantityToAdd(newQuantity);
-		setQuantity(id, newQuantity);
+		setQuantityToAdd(parseInt(newQuantity));
 	};
 
 	const getThemeFromLocalStorage = () => {
@@ -45,12 +44,13 @@ const ProductCard = ({ data }) => {
 	};
 
 	const handleAddCart = () => {
-		if (!isNaN(quantityToAdd) && quantityToAdd > 0) {
-			setCartItems([...cartItems, { ...data, quantity }]);
+		if (!isNaN(quantityToAdd) && quantityToAdd > 0 && quantityToAdd <= 999) {
 			setShowArrow(true);
 			setTimeout(() => {
 				setShowArrow(false);
-				setQuantity(quantityToAdd);
+				setQuantity(parseInt(quantity) + parseInt(quantityToAdd));
+				setCartItems([...cartItems, { ...data }]);
+				adicionarItem(quantityToAdd);
 				setQuantityToAdd(0);
 				document.getElementById(`quantity-input-${id}`).value = 1;
 			}, 500);
@@ -64,10 +64,10 @@ const ProductCard = ({ data }) => {
 		<Tooltip className="custom-tooltip p-0 m-0" id="add-cart">Adicionar ao carrinho</Tooltip>
 	);
 	const infoTooltip = (
-		<Tooltip className="custom-tooltip3 p-0 m-0" id="add-cart">Informações</Tooltip>
+		<Tooltip className="custom-tooltip3 p-0 m-0" id="inf-cart">Informações</Tooltip>
 	);
 	const qtdTooltip = (
-		<Tooltip className="custom-tooltip4 p-0 m-0" id="add-cart">Quantidade</Tooltip>
+		<Tooltip className="custom-tooltip4 p-0 m-0" id="qtd-cart">Quantidade</Tooltip>
 	);
 	return (
 		<>
@@ -121,18 +121,18 @@ const ProductCard = ({ data }) => {
 								</MDBRow>
 								<MDBRow className="p-0 m-0 d-flex justify-content-end 
                                         align-content-end align-items-end text-end">
-									<div className='d-flex justify-content-center align-content-center align-items-center w-auto mb-1 gap-2'>
-										<label>Qtd:</label>
+									<div className='d-flex justify-content-center align-content-center align-items-center w-auto mb-1 gap-1 m-0 p-1'>
+										<label className="fw-bold text-black fs-6 p-0 m-0">Qtd:</label>
 										<OverlayTrigger placement="top" overlay={qtdTooltip}>
 											<MDBInput
 												type="number"
-												id='floatingInput'
+												id={`quantity-input-${id}`}
 												size='sm'
-												value={quantityToAdd}
+												value={parseInt(quantityToAdd)}
 												min={1}
 												max={999}
 												onChange={handleQuantityChange}
-												className=" fw-bold text-center bg-body text-black fs-6 "
+												className=" fw-bold text-center bg-body text-black fs-6 p-0 m-0"
 											/>
 										</OverlayTrigger>
 									</div>
