@@ -73,8 +73,7 @@ const NavIcons = (props) => {
 
 	return (
 		<>
-			<div className="d-flex flex-wrap m-0 p-0 align-items-center gap-1 justify-content-center  align-content-center">
-
+			<div className="d-flex flex-wrap m-0 p-0 align-items-center gap-1 justify-content-center  align-content-center gap-1">
 				{!props.disableCart ? (
 					<Cart />
 				) : (
@@ -131,7 +130,7 @@ const NavIcons = (props) => {
 					</MDBBtn>
 				</OverlayTrigger>
 			</div>
-			< Menu className="p-0 m-0 z-3 top-0 rigth-0  position-fixed d-flex" />
+			< Menu className="m-2" />
 		</>
 	);
 };
