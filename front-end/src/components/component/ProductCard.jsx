@@ -30,7 +30,7 @@ const ProductCard = ({ data }) => {
 
 	const handleQuantityChange = (event) => {
 		let inputValue = parseInt(event.target.value, 10);
-		let newQuantity = Math.min(Math.max(inputValue, 0), 999);
+		let newQuantity = Math.min(Math.max(inputValue, 1), 999);
 		setQuantityToAdd(newQuantity);
 		setQuantity(id, newQuantity);
 	};
@@ -121,7 +121,8 @@ const ProductCard = ({ data }) => {
 								</MDBRow>
 								<MDBRow className="p-0 m-0 d-flex justify-content-end 
                                         align-content-end align-items-end text-end">
-									<div className='w-50'>
+									<div className='d-flex justify-content-center align-content-center align-items-center w-auto mb-1 gap-2'>
+										<label>Qtd:</label>
 										<OverlayTrigger placement="top" overlay={qtdTooltip}>
 											<MDBInput
 												type="number"
