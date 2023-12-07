@@ -111,7 +111,7 @@ const ProductCard = ({ data }) => {
 								</div>
 							)}
 							<MDBCardOverlay className="d-flex flex-column align-content-between justify-content-between align-items-stretch p-2">
-								<MDBRow className="p-0 m-0 row-cols p-0 m-0 d-flex justify-content-center 
+								<MDBRow className="p-0 m-0 row-cols d-flex justify-content-center 
                                             align-content-center align-items-center text-center">
 									<MDBCard className="rounded-7 shadow-5-strong bg-dark opacity-80 border border-3 border-success p-0">
 										<MDBCardTitle className="p-2 m-0 text-center text-white fw-bolder fs-6 bg-transparent">
@@ -119,20 +119,22 @@ const ProductCard = ({ data }) => {
 										</MDBCardTitle>
 									</MDBCard >
 								</MDBRow>
-								<MDBRow className="p-0 m-0 p-0 m-0 d-flex justify-content-end 
+								<MDBRow className="p-0 m-0 d-flex justify-content-end 
                                         align-content-end align-items-end text-end">
-									<OverlayTrigger placement="top" overlay={qtdTooltip}>
-										<MDBInput
-											type="number"
-											id='floatingInput'
-											size='sm'
-											value={quantityToAdd}
-											min={1}
-											max={999}
-											onChange={handleQuantityChange}
-											className="fw-bold text-center bg-body text-black fs-6 w-50"
-										/>
-									</OverlayTrigger>
+									<div className='w-50'>
+										<OverlayTrigger placement="top" overlay={qtdTooltip}>
+											<MDBInput
+												type="number"
+												id='floatingInput'
+												size='sm'
+												value={quantityToAdd}
+												min={1}
+												max={999}
+												onChange={handleQuantityChange}
+												className=" fw-bold text-center bg-body text-black fs-6 "
+											/>
+										</OverlayTrigger>
+									</div>
 									<OverlayTrigger placement="top" overlay={infoTooltip}>
 										<MDBBtn
 											size="sm"
