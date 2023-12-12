@@ -8,7 +8,7 @@ module.exports = {
     veryJWT: async function (req, res, next) {
         const headerToken = req.headers.authorization;
 
-        if (err || !headerToken) {
+        if ( !headerToken) {
             return res.status(401).end();
         } else {
             const [bearer, token] = headerToken.split(' ');
