@@ -5,7 +5,8 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
-const {veryJWT} = require('./middlewares/auth')
+const { veryJWT } = require('./middlewares/auth');
+const seedUsuarios = require ("./seeders/20231031194909-usuario");
 
 app.use(bodyParser.json());
 
@@ -16,18 +17,14 @@ const loginRouter = require("./routes/Auth/login");
 const cadastroUserRouter = require("./routes/Usuario/cadastrosUsuario");
 const deletarUserByIdRouter = require("./routes/Usuario/deletarUserById");
 
-//IMPORTS PRODUTO
-const crudProduto = require("./routes/Produto/crudProduto");
-
-//IMPORTS CARRINHO
-const crudCarrinho = require("./routes/Carrinho/crudCarrinho");
-
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
 
 sequelize.authenticate();
-sequelize.sync().then(() => {
+sequelize.sync({ force: true }).then(async () => {
+    const seeder = require('./seeders/20231031194909-usuario');
+    await seedUsuarios();
     app.listen(port);
     console.log('Servidor rodando na porta ' + port);
 });
@@ -38,11 +35,5 @@ app.use("/", loginRouter);
 //ROTAS USUARIO
 app.use("/", cadastroUserRouter);
 app.use("/", veryJWT, deletarUserByIdRouter);
-
-//ROTAS PRODUTO
-app.use("/", veryJWT, crudProduto);
-
-//ROTAS CARRINHO
-app.use("/", veryJWT, crudCarrinho);
 
 module.exports = app;
