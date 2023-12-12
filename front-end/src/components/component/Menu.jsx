@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { OverlayTrigger, Tooltip, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCubes, faShareFromSquare, faBoxesStacked, faPlugCircleExclamation, faTableCells } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCubes } from '@fortawesome/free-solid-svg-icons';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import UseAnimations from 'react-useanimations';
 import MenuIcon from 'react-useanimations/lib/menu4';
@@ -100,78 +100,6 @@ const Menu = () => {
 										</div>
 										<div className="d-flex col-9 justify-content-center align-content-center">
 											<h6 className="p-0 m-0  text-center ">Retirada</h6>
-										</div>
-									</div>
-								</MDBBtn>
-							</Link>
-						</li>
-						<li className="m-3">
-							<Link to="/entrada">
-								<MDBBtn
-									className={`${theme === 'dark' ? 'border border-2 border-white' : 'border border-2 border-dark'} menu-btn-tamanho bg-primary-emphasis rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center`}>
-									<div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-										<div className="d-flex flex-column col-3 justify-content-start align-content-start">
-											<FontAwesomeIcon
-												icon={faShareFromSquare}
-												className=" me-2 fs-3 text-start"
-											/>
-										</div>
-										<div className="d-flex col-9 justify-content-center align-content-center">
-											<h6 className="p-0 m-0  text-center ">Entrada</h6>
-										</div>
-									</div>
-								</MDBBtn>
-							</Link>
-						</li>
-						<li className="m-3">
-							<Link to="/alterar">
-								<MDBBtn
-									className={`${theme === 'dark' ? 'border border-2 border-white' : 'border border-2 border-dark'} menu-btn-tamanho btn-warning rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center`}>
-									<div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-										<div className="d-flex flex-column col-3 justify-content-start align-content-start">
-											<FontAwesomeIcon
-												icon={faBoxesStacked}
-												className=" me-2 fs-3 text-start"
-											/>
-										</div>
-										<div className="d-flex col-9 justify-content-center align-content-center">
-											<h6 className="p-0 m-0  text-center ">Alterar</h6>
-										</div>
-									</div>
-								</MDBBtn>
-							</Link>
-						</li>
-						<li className="m-3">
-							<Link to="/desativar">
-								<MDBBtn
-									className={`${theme === 'dark' ? 'border border-2 border-white' : 'border border-2 border-dark'} menu-btn-tamanho btn-danger rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center`}>
-									<div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-										<div className="d-flex flex-column col-3 justify-content-start align-content-start">
-											<FontAwesomeIcon
-												icon={faPlugCircleExclamation}
-												className=" me-2 fs-3 text-start"
-											/>
-										</div>
-										<div className="d-flex col-8 justify-content-center align-content-center">
-											<h6 className="p-0 m-0  text-center ">Desativar</h6>
-										</div>
-									</div>
-								</MDBBtn>
-							</Link>
-						</li>
-						<li className="m-3">
-							<Link to="/listar">
-								<MDBBtn
-									className={`${theme === 'dark' ? 'border border-2 border-white' : 'border border-2 border-dark'} menu-btn-tamanho btn-info rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center`}>
-									<div className="d-flex flex-row align-items-center p-0 m-0 gap-3">
-										<div className="d-flex flex-column col-3 justify-content-start align-content-start">
-											<FontAwesomeIcon
-												icon={faTableCells}
-												className=" me-2 fs-3 text-start"
-											/>
-										</div>
-										<div className="d-flex col-9 justify-content-center align-content-center">
-											<h6 className="p-0 m-0  text-center ">Listar</h6>
 										</div>
 									</div>
 								</MDBBtn>
