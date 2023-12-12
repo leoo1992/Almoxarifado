@@ -2,7 +2,7 @@
     "editor.tabSize": 1,
     "editor.insertSpaces": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
+        "source.fixAll.eslint": "explicit"
     },
     "files.eol": "\r\n"
 }
