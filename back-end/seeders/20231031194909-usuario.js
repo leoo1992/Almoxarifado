@@ -1,25 +1,36 @@
-'use strict';
+const sequelize = require("../config/sequelize");
+const Usuario = require("../models/usuario");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('usuario', [
+const seedUsuarios = async () => {
+  try {
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
+    await Usuario.sync();
+
+    const usuarioData = [
       {
-        email: 'usuario1@example.com',
-        senha: 'senha1'
+        usuario: 'leo@leo.com',
+        senha: await bcrypt.hash('leo-1234', saltRounds)
       },
       {
-        email: 'usuario2@example.com',
-        senha: 'senha2'
+        usuario: 'admin@admin.com',
+        senha: await bcrypt.hash('adm-1234', saltRounds)
       },
       {
-        email: 'usuario3@example.com',
-        senha: 'senha3'
+        usuario: 'master@master.com',
+        senha: await bcrypt.hash('mas-1234', saltRounds)
       }
-    ], {});
-  },
+    ];
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('usuario', null, {});
+    await Usuario.bulkCreate(usuarioData);
+    await sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
+    console.log("Dados de Usuario alimentados com sucesso.");
+
+  } catch (err) {
+    console.error("Erro ao inserir dados de Usuario:", err);
+    console.log("Erro detalhado:", err);
   }
 };
 
+module.exports = seedUsuarios;
