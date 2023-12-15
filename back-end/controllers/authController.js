@@ -16,10 +16,12 @@ exports.login = async (req, res) => {
       },
     });
 
-    if (!usuario) {
+    if (!usuarioDoBanco || !usuarioDoBanco.senha || !usuarioDoBanco.usuario)  {
       return res.status(401).json({ error: "Credenciais inválidas." });
     }
+
     const isPasswordValid = await bcrypt.compare(senha, usuarioDoBanco.senha);
+
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Credenciais inválidas." });
     }
