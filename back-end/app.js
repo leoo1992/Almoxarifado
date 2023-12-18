@@ -35,6 +35,6 @@ app.use("/", loginRouter);
 
 //ROTAS USUARIO
 app.use("/", cadastroUserRouter);
-app.use("/", veryJWT, deletarUserByIdRouter);
+app.use("/", deletarUserByIdRouter);
 
 module.exports = app;

@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { veryJWT } = require('../middlewares/auth');
 const Usuario = require("../models/usuario");
-const seedUsuarios = require("../seeders/20231031194909-usuario");
 
 app.use(bodyParser.json());
 
@@ -28,7 +27,7 @@ app.use("/", veryJWT, deletarUserByIdRouter);
 
 beforeAll(async () => {
  await sequelize.authenticate();
- await sequelize.sync({ force: true });
+ await sequelize.sync();
 
  const exampleUser = {
   usuario: 'leo@aei.com',
@@ -37,7 +36,6 @@ beforeAll(async () => {
 
  await Usuario.create(exampleUser);
 
- app.listen(3000);
 });
 
 describe('Testes para Login', () => {
@@ -67,8 +65,6 @@ describe('Testes para Login', () => {
 
  afterAll(async () => {
   await Usuario.destroy({ where: {} });
-  await seedUsuarios();
-  await sequelize.close();
  });
 
 });
