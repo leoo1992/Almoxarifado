@@ -16,23 +16,16 @@ import {
 	MDBCardTitle,
 	MDBCardOverlay,
 	MDBRow,
-	MDBCol,
-	MDBInput
+	MDBCol
 } from 'mdb-react-ui-kit';
 import Provider from '../../context/Provider';
 
 const ProductCard = ({ data }) => {
 
-	const { id, title, thumbnail } = data;
+	const { title, thumbnail } = data;
 	const { cartItems, setCartItems, quantity, setQuantity, adicionarItem } = useContext(CartContext);
 	const [showArrow, setShowArrow] = useState(false);
-	const [quantityToAdd, setQuantityToAdd] = useState(0);
-
-	const handleQuantityChange = (event) => {
-		let inputValue = parseInt(event.target.value, 10);
-		let newQuantity = Math.min(Math.max(inputValue, 1), 999);
-		setQuantityToAdd(parseInt(newQuantity));
-	};
+	const [quantityToAdd] = useState(1);
 
 	const getThemeFromLocalStorage = () => {
 		const storedTheme = localStorage.getItem('theme');
@@ -51,8 +44,6 @@ const ProductCard = ({ data }) => {
 				setQuantity(parseInt(quantity) + parseInt(quantityToAdd));
 				setCartItems([...cartItems, { ...data }]);
 				adicionarItem(quantityToAdd);
-				setQuantityToAdd(0);
-				document.getElementById(`quantity-input-${id}`).value = 1;
 			}, 500);
 			toast.success('Adicionado ao carrinho');
 		} else {
@@ -66,9 +57,7 @@ const ProductCard = ({ data }) => {
 	const infoTooltip = (
 		<Tooltip className="custom-tooltip3 p-0 m-0" id="inf-cart">Informações</Tooltip>
 	);
-	const qtdTooltip = (
-		<Tooltip className="custom-tooltip4 p-0 m-0" id="qtd-cart">Quantidade</Tooltip>
-	);
+
 	return (
 		<>
 			<Provider>
@@ -121,21 +110,6 @@ const ProductCard = ({ data }) => {
 								</MDBRow>
 								<MDBRow className="p-0 m-0 d-flex justify-content-end 
                                         align-content-end align-items-end text-end">
-									<div className='d-flex justify-content-center align-content-center align-items-center w-auto mb-1 gap-1 m-0 p-1'>
-										<label className="fw-bold text-black fs-6 p-0 m-0">Qtd:</label>
-										<OverlayTrigger placement="top" overlay={qtdTooltip}>
-											<MDBInput
-												type="number"
-												id={`quantity-input-${id}`}
-												size='sm'
-												value={parseInt(quantityToAdd)}
-												min={1}
-												max={999}
-												onChange={handleQuantityChange}
-												className=" fw-bold text-center bg-body text-black fs-6 p-0 m-0"
-											/>
-										</OverlayTrigger>
-									</div>
 									<OverlayTrigger placement="top" overlay={infoTooltip}>
 										<MDBBtn
 											size="sm"

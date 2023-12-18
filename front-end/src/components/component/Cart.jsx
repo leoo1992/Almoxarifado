@@ -155,7 +155,7 @@ function Cart() {
 					</Offcanvas.Body>
 					<div className="bg-primary p-1 m-0 d-flex justify-content-center align-content-center align-items-center rounded-bottom-3 border">
 						<MDBBadge className='bg-body text-black text-center m-1 d-flex col'>
-							Itens: {cartItems.length} | Qtd: {parseInt(quantity)}
+							Itens: {cartItems.length}
 						</MDBBadge>
 						<MDBBtnGroup size='sm' className='shadow-5-strong border'>
 							<MDBBtn

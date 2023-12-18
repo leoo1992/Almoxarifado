@@ -15,9 +15,6 @@ function Provider({ children }) {
 
 	const adicionarItem = (item) => {
 		setMyCart([...myCart, item]);
-		console.log(item);
-		console.log(myCart);
-
 	};
 
 	const removerItemCart = (index) => {
@@ -29,8 +26,6 @@ function Provider({ children }) {
 	const removeMycart = () => {
 		setMyCart([]);
 	};
-
-
 
 	const customIcon = <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />;
 
