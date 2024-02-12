@@ -37,7 +37,8 @@ const HomePage = () => {
 						<OverlayTrigger placement="bottom" overlay={retirarTooltip} delay={{ show: 250, hide: 400 }}>
 							<Link to="/retirar">
 								<MDBBtn
-									className="p-3 m-0 bg-transparent btn-outline-success rounded-9 shadow-5-strong shadow-5-primary d-flex justify-content-center align-content-center align-items-center">
+									style={{ boxShadow: '1px 1px 5px 0px' }}
+									className="p-3 m-0 bg-transparent btn-outline-success rounded-9  d-flex justify-content-center align-content-center align-items-center">
 									<div className="d-flex justify-content-center align-content-center align-items-center rounded-9 p-0 m-0 ">
 										<FontAwesomeIcon
 											icon={faCubes}

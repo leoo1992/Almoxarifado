@@ -11,12 +11,12 @@ const root = document.getElementById('root');
 const timeToken = new Date();
 const cookies = Cookies.get();
 
-// console.error = () => { };
-// console.warn = () => { };
-// console.info = () => { };
-// console.log = () => { };
-// console.trace = () => { };
-// console.debug = () => { };
+console.error = () => { };
+console.warn = () => { };
+console.info = () => { };
+console.log = () => { };
+console.trace = () => { };
+console.debug = () => { };
 
 if (timeToken.getHours() < new Date().getHours()) {
 	localStorage.removeItem('token');
