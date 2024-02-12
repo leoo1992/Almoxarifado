@@ -145,4 +145,8 @@ npm start
 ![cart.png](./front-end/src/assets/cart.png)
 ![end.png](./front-end/src/assets/end.png)
 
+## Tablet
+![Tablet.png](./front-end/src/assets/Tablet.png)
 
+## Mobile
+![mobile.png](./front-end/src/assets/mobile.png)
