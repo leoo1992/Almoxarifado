@@ -1,4 +1,4 @@
-#USA-EN
+## USA-EN
 # Welcome to my project 
 A web application crafted using an array of technologies and tools. This repository serves as a comprehensive resource, housing both the source code and documentation essential for gaining insight into the intricacies of the project.
 
@@ -61,7 +61,7 @@ cd .\front-end\
 npm start
 ```
 
-#PT-BR
+## PT-BR
 # Bem-vindo ao meu projeto 
 Uma aplicação web desenvolvida utilizando uma variedade de tecnologias e ferramentas. Este repositório serve como um recurso abrangente, abrigando tanto o código-fonte quanto a documentação essencial para obter insights sobre as complexidades do projeto.
 
@@ -121,7 +121,7 @@ cd .\front-end\
 npm start
 ```
 
-#Project Images / imagens do projeto:
+# Project Images / imagens do projeto:
 
 ## Login
 ![login.png](./front-end/src/assets/login.png)
@@ -137,7 +137,11 @@ npm start
 ## App
 ![globalThemeToggle.png](./front-end/src/assets/globalThemeToggle.png)
 ![OffcanvasMenu.png](./front-end/src/assets/OffcanvasMenu.png)
+
+## Search and add in cart / Procurar e adicionar ao Carrinho 
 ![search.png](./front-end/src/assets/search.png)
+
+## Finalizing the purchase purchase / Finalizarndo a compra
 ![cart.png](./front-end/src/assets/cart.png)
 ![end.png](./front-end/src/assets/end.png)
 
