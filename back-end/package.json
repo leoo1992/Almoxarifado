@@ -23,7 +23,7 @@
     "mysql2": "^3.6.0",
     "node": "^21.1.0",
     "path": "^0.12.7",
-    "sequelize": "^6.33.0"
+    "sequelize": "^6.37.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",
