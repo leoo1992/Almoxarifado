@@ -19,7 +19,7 @@
     "http-proxy-middleware": "^2.0.6",
     "js-cookie": "^3.0.5",
     "mdb-react-ui-kit": "^7.0.0",
-    "node": "^21.6.2",
+    "node": "^21.7.0",
     "nth-check": "^2.1.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
